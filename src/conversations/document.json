@@ -1,0 +1,185 @@
+[
+    {
+        "type": "StateShape",
+        "id": "63c0f27a-716e-804c-6873-cd99b945b63f",
+        "x": 882,
+        "y": 146,
+        "width": 90.0390625,
+        "height": 80.525390625,
+        "alpha": 1,
+        "selectable": true,
+        "draggable": true,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "StateShape",
+        "bgColor": "rgba(219,221,222,1)",
+        "color": "rgba(215,215,215,1)",
+        "stroke": 1,
+        "radius": 3,
+        "dasharray": null,
+        "gap": 0,
+        "name": "Group",
+        "trigger": [
+            {
+                "text": "id",
+                "id": "49be7d78-4dcf-38ab-3733-b4108701f1"
+            },
+            {
+                "text": "employee_fk",
+                "id": "49be7d78-4dcf-38ab-3733-b4108701fce4"
+            }
+        ]
+    },
+    {
+        "type": "StateShape",
+        "id": "3253ff2a-a920-09d5-f033-ca759a778e19",
+        "x": 214,
+        "y": 85,
+        "width": 86.703125,
+        "height": 59.05078125,
+        "alpha": 1,
+        "selectable": true,
+        "draggable": true,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "StateShape",
+        "bgColor": "rgba(219,221,222,1)",
+        "color": "rgba(215,215,215,1)",
+        "stroke": 1,
+        "radius": 3,
+        "dasharray": null,
+        "gap": 0,
+        "name": "Employee",
+        "trigger": [
+            {
+                "text": "company_fk",
+                "id": "8d410fef-5c6e-286d-c9c3-c152d5bd9c52"
+            }
+        ]
+    },
+    {
+        "type": "StateShape",
+        "id": "2810494b-931f-da59-fd9d-6deba4385fe0",
+        "x": 537,
+        "y": 206,
+        "width": 75.359375,
+        "height": 59.025390625,
+        "alpha": 1,
+        "selectable": true,
+        "draggable": true,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "StateShape",
+        "bgColor": "rgba(219,221,222,1)",
+        "color": "rgba(215,215,215,1)",
+        "stroke": 1,
+        "radius": 3,
+        "dasharray": null,
+        "gap": 0,
+        "name": "Company",
+        "trigger": [
+            {
+                "text": "id",
+                "id": "e04ebb27-43c9-1afa-a7d0-e55bf2aa62d5"
+            }
+        ]
+    },
+    {
+        "type": "TriggerConnection",
+        "id": "0681715b-72c3-3f3f-76d5-7a09ca61634b",
+        "alpha": 1,
+        "selectable": true,
+        "draggable": true,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "TriggerConnection",
+        "stroke": 3,
+        "color": "rgba(145,185,62,1)",
+        "outlineStroke": 1,
+        "outlineColor": "rgba(48,48,48,1)",
+        "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+        "vertex": [
+            {
+                "x": 612.359375,
+                "y": 224.7626953125
+            },
+            {
+                "x": 747.1796875,
+                "y": 224.7626953125
+            },
+            {
+                "x": 747.1796875,
+                "y": 164.75
+            },
+            {
+                "x": 882,
+                "y": 164.75
+            }
+        ],
+        "router": "draw2d.layout.connection.InteractiveManhattanConnectionRouter",
+        "radius": 3,
+        "routingMetaData": {
+            "routedByUserInteraction": false,
+            "fromDir": 1,
+            "toDir": 3
+        },
+        "source": {
+            "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+            "port": "output0"
+        },
+        "target": {
+            "node": "63c0f27a-716e-804c-6873-cd99b945b63f",
+            "port": "input0",
+            "decoration": "draw2d.decoration.connection.ArrowDecorator"
+        }
+    },
+    {
+        "type": "TriggerConnection",
+        "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
+        "alpha": 1,
+        "selectable": true,
+        "draggable": true,
+        "angle": 0,
+        "userData": {},
+        "cssClass": "TriggerConnection",
+        "stroke": 3,
+        "color": "rgba(145,185,62,1)",
+        "outlineStroke": 1,
+        "outlineColor": "rgba(48,48,48,1)",
+        "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+        "vertex": [
+            {
+                "x": 300.703125,
+                "y": 103.7626953125
+            },
+            {
+                "x": 418.8515625,
+                "y": 103.7626953125
+            },
+            {
+                "x": 418.8515625,
+                "y": 224.7626953125
+            },
+            {
+                "x": 537,
+                "y": 224.7626953125
+            }
+        ],
+        "router": "draw2d.layout.connection.InteractiveManhattanConnectionRouter",
+        "radius": 3,
+        "routingMetaData": {
+            "routedByUserInteraction": false,
+            "fromDir": 1,
+            "toDir": 3
+        },
+        "source": {
+            "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+            "port": "output0"
+        },
+        "target": {
+            "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+            "port": "input0",
+            "decoration": "draw2d.decoration.connection.ArrowDecorator"
+        }
+    }
+]
