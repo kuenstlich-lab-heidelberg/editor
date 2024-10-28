@@ -1,11 +1,13 @@
 {
-    "config": {},
+    "config": {
+        "system_prompt": "prompt"
+    },
     "diagram": [
         {
             "type": "StateShape",
             "id": "63c0f27a-716e-804c-6873-cd99b945b63f",
-            "x": 935,
-            "y": 94,
+            "x": 919,
+            "y": 225,
             "width": 90.0390625,
             "height": 92.525390625,
             "alpha": 1,
@@ -35,10 +37,10 @@
         {
             "type": "StateShape",
             "id": "3253ff2a-a920-09d5-f033-ca759a778e19",
-            "x": 214,
-            "y": 85,
+            "x": 170,
+            "y": 78,
             "width": 88.7109375,
-            "height": 64.025390625,
+            "height": 92.525390625,
             "alpha": 1,
             "selectable": true,
             "draggable": true,
@@ -56,14 +58,18 @@
                 {
                     "text": "pick_up_key",
                     "id": "8d410fef-5c6e-286d-c9c3-c152d5bd9c52"
+                },
+                {
+                    "text": "_new_",
+                    "id": "be237b35-d644-222f-c8b0-822a3b96851f"
                 }
             ]
         },
         {
             "type": "StateShape",
             "id": "2810494b-931f-da59-fd9d-6deba4385fe0",
-            "x": 531,
-            "y": 260,
+            "x": 173,
+            "y": 292,
             "width": 74.03125,
             "height": 64,
             "alpha": 1,
@@ -90,55 +96,6 @@
         },
         {
             "type": "TriggerConnection",
-            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
-            "alpha": 1,
-            "selectable": true,
-            "draggable": true,
-            "angle": 0,
-            "userData": {},
-            "cssClass": "TriggerConnection",
-            "stroke": 3,
-            "color": "rgba(145,185,62,1)",
-            "outlineStroke": 1,
-            "outlineColor": "rgba(48,48,48,1)",
-            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
-            "vertex": [
-                {
-                    "x": 302.7109375,
-                    "y": 102.75
-                },
-                {
-                    "x": 440.3515625,
-                    "y": 102.75
-                },
-                {
-                    "x": 440.3515625,
-                    "y": 277.75
-                },
-                {
-                    "x": 531,
-                    "y": 277.75
-                }
-            ],
-            "radius": 3,
-            "routingMetaData": {
-                "routedByUserInteraction": true,
-                "fromDir": 1,
-                "toDir": 3
-            },
-            "source": {
-                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
-                "port": "output0"
-            },
-            "target": {
-                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
-                "port": "input0",
-                "decoration": "draw2d.decoration.connection.ArrowDecorator"
-            },
-            "name": "go_to_room_02"
-        },
-        {
-            "type": "TriggerConnection",
             "id": "0681715b-72c3-3f3f-76d5-7a09ca61634b",
             "alpha": 1,
             "selectable": true,
@@ -153,20 +110,20 @@
             "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
             "vertex": [
                 {
-                    "x": 605.03125,
-                    "y": 277.75
+                    "x": 247.03125,
+                    "y": 309.75
                 },
                 {
                     "x": 759.06640625,
-                    "y": 277.75
+                    "y": 309.75
                 },
                 {
                     "x": 759.06640625,
-                    "y": 111.75
+                    "y": 242.75
                 },
                 {
-                    "x": 935,
-                    "y": 111.75
+                    "x": 919,
+                    "y": 242.75
                 }
             ],
             "radius": 3,
@@ -185,6 +142,63 @@
                 "decoration": "draw2d.decoration.connection.ArrowDecorator"
             },
             "name": "go_to_room_03"
+        },
+        {
+            "type": "TriggerConnection",
+            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {},
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(145,185,62,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(48,48,48,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 258.7109375,
+                    "y": 95.75
+                },
+                {
+                    "x": 278.7109375,
+                    "y": 95.75
+                },
+                {
+                    "x": 278.7109375,
+                    "y": 202.75
+                },
+                {
+                    "x": 153,
+                    "y": 202.75
+                },
+                {
+                    "x": 153,
+                    "y": 309.75
+                },
+                {
+                    "x": 173,
+                    "y": 309.75
+                }
+            ],
+            "radius": 3,
+            "routingMetaData": {
+                "routedByUserInteraction": false,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+                "port": "output0"
+            },
+            "target": {
+                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator"
+            },
+            "name": "go_to_room_02"
         }
     ]
 }

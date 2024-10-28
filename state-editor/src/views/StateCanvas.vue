@@ -57,7 +57,6 @@ export default {
   watch: {
     conversationDiagram: {
       handler(newConversationDiagram) {
-        console.log(this.blocked)
         if(this.blocked){
           this.blocked = false;
           return
@@ -69,11 +68,6 @@ export default {
         }
       },
       immediate: true, // Immediately run the handler when component is created
-    },
-    
-    documentRequestTrigger() {
-      const iframe = this.$refs.draw2dFrame.contentWindow;
-      iframe.postMessage({ type: 'saveDocumentRequest' }, '*');
     }
   },
 
@@ -126,12 +120,7 @@ export default {
     window.addEventListener('message', (event) => {
       if (event.origin !== window.location.origin) return;
       const message = event.data;
-      if (message.type === 'saveDocumentData') {
-        console.log("save data....")
-        this.saveReceivedDocument(message.data);
-      }
-      else if (message.type === 'updateDocumentData') {
-        console.log("update data....")
+      if (message.type === 'updateDocumentData') {
         this.blocked = true
         this.updateConversationDiagram(message.data)
       }

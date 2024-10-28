@@ -10,8 +10,7 @@ export default {
     conversationDiagram: [],
     conversationName: "unknown.json",
     loading: false,
-    error: null,
-    documentRequestTrigger: false,
+    error: null
   },
   mutations: {
     SET_CONVERSATIONS(state, conversations) {
@@ -19,6 +18,7 @@ export default {
     },
     SET_CONVERSATION_CONFIG(state, data) {
       state.conversationConfig = data;
+      console.log(data)
     },
     SET_CONVERSATION_DIAGRAM(state, data) {
       state.conversationDiagram = data;
@@ -28,9 +28,6 @@ export default {
     },
     SET_ERROR(state, error) {
       state.error = error;
-    },
-    TRIGGER_DOCUMENT_REQUEST(state) {
-      state.documentRequestTrigger = !state.documentRequestTrigger; // Toggle the trigger
     },
     SET_CONVERSATION_NAME(state, newName) {
       state.conversationName = newName;
@@ -79,6 +76,7 @@ export default {
     },
 
     async updateConversationConfig({ commit }, data) {
+      console.log("config", data)
       commit('SET_CONVERSATION_CONFIG', data);
     },
 
@@ -86,9 +84,10 @@ export default {
       commit('SET_CONVERSATION_DIAGRAM', data);
     },
 
-    async saveConversation({ commit,state }, { fileName }) {
+    async saveConversation({ commit,state }) {
         commit('SET_LOADING', true);
         commit('SET_ERROR', null);
+        console.log("save",state.conversationConfig)
         try {
           const formattedJson = JSON.stringify({
             "config": state.conversationConfig,
@@ -97,7 +96,7 @@ export default {
 
           const blob = new Blob([formattedJson], { type: 'application/json' });
           const formData = new FormData();
-          formData.append('file', blob, fileName);
+          formData.append('file', blob, state.conversationName);
 
           // Send POST request to backend
           await axios.post(`${API_BASE_URL}/conversations/`, formData, {
@@ -105,7 +104,7 @@ export default {
               'Content-Type': 'multipart/form-data',
             },
           });
-          commit('SET_CONVERSATION_NAME', fileName);
+          //commit('SET_CONVERSATION_NAME', fileName);
         } catch (error) {
           commit('SET_ERROR', error.response?.data?.detail || 'Error saving document');
           throw error;
@@ -113,19 +112,12 @@ export default {
           commit('SET_LOADING', false);
         }
     },
-
-    // Action to toggle the document request trigger
-    triggerDocumentRequest({ commit }) {
-      commit('TRIGGER_DOCUMENT_REQUEST');
-    },
   },
   getters: {
     conversations: (state) => state.conversations,
     conversationConfig: (state) => state.conversationConfig,
     conversationDiagram: (state) => state.conversationDiagram,
     conversationName: (state) => state.conversationName,
-
-    documentRequestTrigger: (state) => state.documentRequestTrigger,
 
     isLoading: (state) => state.loading,
     error: (state) => state.error,

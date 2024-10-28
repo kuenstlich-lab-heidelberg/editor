@@ -59,19 +59,8 @@ document.addEventListener("DOMContentLoaded",function () {
             app.view.clear();
             reader.unmarshal(app.view, conversationJson);
         }
-        else if (message.type === 'saveDocumentRequest') {
-            var writer = new draw2d.io.json.Writer();
-            writer.marshal(app.view, function(json){
-                window.parent.postMessage({ type: 'saveDocumentData', data: json }, '*');
-            });
-        }
         else if (message.type === 'setShapeData') {
           app.view.setShapeData(message.data)
-          var writer = new draw2d.io.json.Writer();
-          writer.marshal(app.view, function(json){
-              console.log("Fire Event to parent")
-              window.parent.postMessage({ type: 'updateDocumentData', data: json }, '*');
-          });
         }
       }
 

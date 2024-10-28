@@ -4,7 +4,7 @@
       <v-icon>mdi-home</v-icon>
     </v-btn>
     <v-btn text @click="openFileDialog">Load</v-btn>
-    <v-btn text @click="triggerSave">Save</v-btn> 
+    <v-btn text @click="save">Save</v-btn> 
     <v-spacer></v-spacer>
 
     <FilePickerDialog v-model:dialog="filePickerDialog" />
@@ -26,15 +26,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions('conversations', ['triggerDocumentRequest']),
+    ...mapActions('conversations', ['saveConversation']),
 
     openFileDialog() {
       this.filePickerDialog = true;
     },
-    triggerSave() {
-      // request the JSON document from the inner IFrame
-      this.triggerDocumentRequest();
-      console.log("Document request triggered");
+    save() {
+      console.log("Save Document");
+      this.saveConversation();
     },
   },
 };

@@ -11,6 +11,18 @@ View = draw2d.Canvas.extend({
             }
         }));
     
+        this.getCommandStack().addEventListener((e)=>{
+            if(e.isPostChangeEvent()){
+                console.log("chagned....")
+                var writer = new draw2d.io.json.Writer();
+                writer.marshal(this, function(json){
+                    if( json.length ===0)
+                        return
+                    console.log(json)
+                    window.parent.postMessage({ type: 'updateDocumentData', data: json }, '*');
+                });                
+            }
+        });
 	},
 
     getFigure: function(id)
