@@ -6,7 +6,8 @@ export default {
   namespaced: true,
   state: {
     conversations: [],
-    conversationJson: [],
+    conversationConfig: [],
+    conversationDiagram: [],
     conversationName: "unknown.json",
     loading: false,
     error: null,
@@ -16,8 +17,11 @@ export default {
     SET_CONVERSATIONS(state, conversations) {
       state.conversations = conversations;
     },
-    SET_CONVERSATION_JSON(state, data) {
-      state.conversationJson = data;
+    SET_CONVERSATION_CONFIG(state, data) {
+      state.conversationConfig = data;
+    },
+    SET_CONVERSATION_DIAGRAM(state, data) {
+      state.conversationDiagram = data;
     },
     SET_LOADING(state, isLoading) {
       state.loading = isLoading;
@@ -33,6 +37,15 @@ export default {
     },
   },
   actions: {
+    async initialize({ dispatch }) {
+      // Load the default "document.json" file on initialization
+      try {
+        await dispatch('downloadConversation', 'document.json');
+      } catch (error) {
+        console.error('Failed to load default conversation:', error);
+      }
+    },
+
     async fetchConversations({ commit }) {
       commit('SET_LOADING', true);
       commit('SET_ERROR', null);
@@ -53,8 +66,9 @@ export default {
         const response = await axios.get(`${API_BASE_URL}/conversations/${fileName}`, {
           responseType: 'blob',
         });
-        const conversationJson = await response.data.text(); 
-        commit('SET_CONVERSATION_JSON', conversationJson); 
+        const conversationData = JSON.parse(await response.data.text()); 
+        commit('SET_CONVERSATION_CONFIG', conversationData.config); 
+        commit('SET_CONVERSATION_DIAGRAM', conversationData.diagram); 
         commit('SET_CONVERSATION_NAME', fileName);
       } catch (error) {
         commit('SET_ERROR', error.response?.data?.detail || 'Error downloading file');
@@ -64,17 +78,24 @@ export default {
       }
     },
 
+    async updateConversationConfig({ commit }, data) {
+      commit('SET_CONVERSATION_CONFIG', data);
+    },
 
-    async saveConversation({ commit }, { fileName, conversationDocument }) {
+    async updateConversationDiagram({ commit }, data) {
+      commit('SET_CONVERSATION_DIAGRAM', data);
+    },
+
+    async saveConversation({ commit,state }, { fileName }) {
         commit('SET_LOADING', true);
         commit('SET_ERROR', null);
         try {
-          // Convert JSON document to a Blob for submission
-    // Convert JSON document to pretty-printed format without additional escaping
-          const formattedJson = JSON.stringify(conversationDocument, null, 4);
-          console.log(formattedJson) 
-          const blob = new Blob([formattedJson], { type: 'application/json' });
+          const formattedJson = JSON.stringify({
+            "config": state.conversationConfig,
+            "diagram": state.conversationDiagram
+          }, null, 4);
 
+          const blob = new Blob([formattedJson], { type: 'application/json' });
           const formData = new FormData();
           formData.append('file', blob, fileName);
 
@@ -100,7 +121,8 @@ export default {
   },
   getters: {
     conversations: (state) => state.conversations,
-    conversationJson: (state) => state.conversationJson,
+    conversationConfig: (state) => state.conversationConfig,
+    conversationDiagram: (state) => state.conversationDiagram,
     conversationName: (state) => state.conversationName,
 
     documentRequestTrigger: (state) => state.documentRequestTrigger,

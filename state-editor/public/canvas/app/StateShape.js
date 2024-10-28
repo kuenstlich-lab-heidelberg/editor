@@ -3,17 +3,29 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
 
 	NAME: "StateShape",
 	
-    init : function(attr)
+    init : function(attr, setter, getter)
     {
-    	this._super($.extend({bgColor:"#dbddde", color:"#d7d7d7", stroke:1, radius:3},attr));
-        
+    	this._super(
+            extend({
+                bgColor:null, 
+                color:"#d7d7d7", 
+                stroke:1, 
+                gap: 5,
+                radius:3},attr),
+            extend({
+              name: this.setName,
+            }, setter),
+            extend({
+              name: this.getName,
+            }, getter))
+            
       
         this.classLabel = new draw2d.shape.basic.Label({
             text:"ClassName", 
             stroke:1,
             fontColor:"#5856d6",  
             bgColor:"#f7f7f7", 
-            radius: this.getRadius(), 
+            radius: 0, 
             padding:10,
             resizeable:true,
             editor:new draw2d.ui.LabelInplaceEditor()
@@ -22,7 +34,6 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
         // flag which indicates if the figure should read/write ports to
         // JSON
         this.persistPorts = false
-        console.log("Create Ports")
         var input = this.classLabel.createPort("input");
         var output= this.classLabel.createPort("output");
         
@@ -39,17 +50,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
      */
     addTrigger: function(txt, optionalIndex)
     {
-	   	 var label =new draw2d.shape.basic.Label({
-	   	     text:txt,
-	   	     stroke:0,
-	   	     radius:0,
-	   	     bgColor:null,
-	   	     padding:{left:10, top:3, right:10, bottom:5},
-	   	     fontColor:"#4a4a4a",
-	   	     resizeable:true,
-             editor:new draw2d.ui.LabelEditor()
-	   	 });
-
+	   	 var label =new TriggerLabel(txt);
          
          var _table=this;
          label.on("contextmenu", function(emitter, event){
@@ -99,6 +100,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
 	     else{
 	         this.add(label);
 	     }
+         label.setSelectionAdapter(null);
 
 	     return label;
     },
@@ -134,13 +136,17 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
       * 
       * @param name
       */
-     setName: function(name)
-     {
-         this.classLabel.setText(name);
-         
-         return this;
-     },
+    setName: function(name)
+    {
+        this.classLabel.setText(name);
+        return this;
+    },
      
+     
+    getName: function()
+    {
+        return this.classLabel.getText();
+    },
      
      /**
       * @method 
@@ -185,6 +191,11 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
                  var trigger =this.addTrigger(e.text);
                  trigger.id = e.id;
              },this));
+         }
+         
+         var userData = this.getUserData();
+         if(userData===null){
+            this.setUserData(userData={system_prompt:""});   
          }
 
          return this;

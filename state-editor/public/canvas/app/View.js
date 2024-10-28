@@ -1,6 +1,6 @@
 
 
-example.View = draw2d.Canvas.extend({
+View = draw2d.Canvas.extend({
 	
 	init:function(id)
     {
@@ -13,7 +13,52 @@ example.View = draw2d.Canvas.extend({
     
 	},
 
-    
+    getFigure: function(id)
+    {
+        let result = null
+
+        this.getFigures().each( (i, figure)=> {
+            if(result !== null){
+                return false
+            }
+            if(figure.id === id ){
+                result = figure;
+                return false
+            }
+            figure.children.each(function (i, entry) {
+                console.log("entry", entry)
+                let child = entry.figure
+                if(child.id === id ){
+                    result = child;
+                    return false
+                }
+              })
+        });
+        console.log(result)
+        return result
+    },
+
+    setShapeData: function(data){
+        var shape = this.getFigure(data.id)
+        if(shape){
+            console.log("found", shape)
+            shape.attr(data)
+            return this
+        }
+
+
+        shape = this.getLine(data.id)
+        if(shape){
+            shape.attr( {
+                name: data.name,
+                userData: data.userData
+            })
+            return this
+        }
+
+        return this
+    },
+
     /**
      * @method
      * Called if the user drop the droppedDomNode onto the canvas.<br>

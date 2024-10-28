@@ -1,12 +1,18 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
 import StateCanvas from '../views/StateCanvas.vue';
+import Configuration from '../views/Configuration.vue';
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: '/diagram',
+    name: 'diagram',
     component: StateCanvas
+  },
+  {
+    path: '/configuration',
+    name: 'configuration',
+    component: Configuration
   }
 ];
 

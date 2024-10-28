@@ -13,10 +13,11 @@
 
   <script src="./lib/draw2d.js"></script>
 
-    <script src="./app/Application.js"></script>
-    <script src="./app/View.js"></script>
-    <script src="./app/TriggerConnection.js"></script>
-    <script src="./app/StateShape.js"></script>
+  <script src="./app/Application.js"></script>
+  <script src="./app/View.js"></script>
+  <script src="./app/TriggerLabel.js"></script>
+  <script src="./app/TriggerConnection.js"></script>
+  <script src="./app/StateShape.js"></script>
 
 	<style>
 	.draw2d_InputPort{
@@ -43,9 +44,11 @@
 
 document.addEventListener("DOMContentLoaded",function () {
 
-    var app  = new example.Application();
+    var app  = new Application();
 
       function receiveMessage(event) {
+        console.log("EVENT_IN_DRAW2D")
+
         if (event.origin !== window.location.origin) return;
 
         const message = event.data;
@@ -53,14 +56,22 @@ document.addEventListener("DOMContentLoaded",function () {
         if (message.type === 'setDocument') {
             const conversationJson = message.data;
             var reader = new draw2d.io.json.Reader();
+            app.view.clear();
             reader.unmarshal(app.view, conversationJson);
         }
-        else if (message.type === 'getDocument') {
-            console.log("getDocument....")
+        else if (message.type === 'saveDocumentRequest') {
             var writer = new draw2d.io.json.Writer();
             writer.marshal(app.view, function(json){
-                window.parent.postMessage({ type: 'documentData', data: json }, '*');
+                window.parent.postMessage({ type: 'saveDocumentData', data: json }, '*');
             });
+        }
+        else if (message.type === 'setShapeData') {
+          app.view.setShapeData(message.data)
+          var writer = new draw2d.io.json.Writer();
+          writer.marshal(app.view, function(json){
+              console.log("Fire Event to parent")
+              window.parent.postMessage({ type: 'updateDocumentData', data: json }, '*');
+          });
         }
       }
 

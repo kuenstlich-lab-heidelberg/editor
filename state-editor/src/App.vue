@@ -3,6 +3,21 @@
 
         <app-toolbar @requestDocument="handleRequestDocument" />
 
+        <!-- Navigation Drawer with Router Links -->
+        <v-navigation-drawer app permanent  width="240">
+          <v-list dense>
+            <v-list-item
+              v-for="item in navigationItems"
+              :key="item.title"
+              :to="item.route"
+              router>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-navigation-drawer>
+        
         <v-main class="content-area">
           <router-view  ref="iframeContainer"></router-view>
         </v-main>
@@ -13,13 +28,32 @@
 
   <script>
   import AppToolbar from './components/AppToolbar.vue'; 
+  import { mapActions } from 'vuex';
 
 
   export default {
     components: {
       AppToolbar
     },
+    data() {
+      return {
+        navigationItems: [
+          { title: 'Configuration', route: '/configuration' },
+          { title: 'Diagram', route: '/diagram' },
+        ],
+      };
+    },
+    created() {
+      // Call the namespaced initialize action from the conversations module
+      setTimeout(() => {
+        this.initializeConversation();
+      }, 500);
+    },
+  
     methods: {
+      ...mapActions('conversations', {
+        initializeConversation: 'initialize'
+      }),
       handleRequestDocument() {
         // Call the requestDraw2dDocument method in the Iframe component
       // Check if the router-view has a component and that component has the method
