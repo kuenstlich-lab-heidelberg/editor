@@ -76,7 +76,10 @@ var TriggerConnection= draw2d.Connection.extend({
         delete memento.router
 
         memento.name = this.getName();
-         
+        memento.source.name= this.getSource().getParent().getText()
+        memento.target.name= this.getTarget().getParent().getText()
+        console.log("CONNECTION")
+        //debugger
         return memento;
      },
      

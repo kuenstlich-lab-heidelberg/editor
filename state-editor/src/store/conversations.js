@@ -1,4 +1,5 @@
 import axios from 'axios';
+import yaml from 'js-yaml';
 
 const API_BASE_URL = process.env.VUE_APP_API_BASE_URL;
 
@@ -111,8 +112,8 @@ export default {
             "diagram": state.conversationDiagram
           }, null, 4);
 
-          const blob = new Blob([formattedJson], { type: 'application/json' });
-          const formData = new FormData();
+          let blob = new Blob([formattedJson], { type: 'application/json' });
+          let formData = new FormData();
           formData.append('file', blob, state.conversationName);
 
           // Send POST request to backend
@@ -121,6 +122,60 @@ export default {
               'Content-Type': 'multipart/form-data',
             },
           });
+
+          // save it as YAML as well for the agent software
+          //
+          const stateShapes = state.conversationDiagram
+            .filter((item) => item.type === "StateShape")
+            .map((shape) => ({
+              name: shape.name,
+              system_prompt: (shape.userData?.system_prompt ?? "").trim(),
+            }));
+
+          const trans = state.conversationDiagram
+          .filter((shape) => shape.type === "StateShape" && shape.trigger && shape.trigger.length > 0) // Find StateShapes with triggers
+          .flatMap((shape) => 
+            shape.trigger.map((trigger) => ({
+              name: trigger.name,
+              source: shape.name,
+              dest: shape.name,
+              metadata: {
+                system_prompt: shape.userData?.system_prompt || "",
+                conditions: trigger.conditions || [],
+                actions: trigger.actions || []
+              }
+            }))
+          );
+
+          const trans2 = state.conversationDiagram
+          .filter((item) => item.type === "TriggerConnection") // Filter only TriggerConnection shapes
+          .map((triggerConnection) => ({
+            name: triggerConnection.name,
+            source: triggerConnection.source.name, // Directly use the source name
+            dest: triggerConnection.target.name,   // Directly use the target name
+            metadata: {
+              system_prompt: triggerConnection.userData?.system_prompt || "",
+              conditions: triggerConnection.userData?.conditions || [],
+              actions: triggerConnection.userData?.actions || []
+            }
+          }));
+        
+
+          let formatedYaml = yaml.dump({
+            initial: "blah",
+            metadata: state.conversationConfig,
+            states: stateShapes,
+            transitions: [...trans, ...trans2]
+          })
+          blob = new Blob([formatedYaml], { type: 'application/json' });
+          formData = new FormData();
+          formData.append('file', blob, state.conversationName.replace(".json", ".yaml"));
+          await axios.post(`${API_BASE_URL}/conversations/`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+
           //commit('SET_CONVERSATION_NAME', fileName);
         } catch (error) {
           commit('SET_ERROR', error.response?.data?.detail || 'Error saving document');

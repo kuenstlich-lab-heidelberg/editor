@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, nextTick } from 'vue';
+import { nextTick } from 'vue';
 import { mapGetters, mapActions } from 'vuex';
 import { Splitpanes, Pane } from 'splitpanes';
 import 'splitpanes/dist/splitpanes.css';
@@ -74,10 +74,8 @@ export default {
   methods: {
     ...mapActions('conversations', ['saveConversation', 'updateConversationDiagram']),
 
-    async saveReceivedDocument(documentData) {
-      await this.saveConversation({
-        fileName: this.conversationName
-      });
+    async saveReceivedDocument() {
+      await this.saveConversation();
     },
     updateDraw2dFrame() {
       // Check if the draw2dFrame ref is set

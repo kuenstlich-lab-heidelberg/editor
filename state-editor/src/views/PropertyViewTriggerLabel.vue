@@ -1,7 +1,6 @@
 <template>
     <div class="property-view"  v-if="jsonData.type === 'TriggerLabel'">
         <h3>Loopback Trigger</h3>
-        <label for="stateName">Name:</label>
         <input
             id="stateName"
             type="text"
@@ -9,6 +8,32 @@
             @input="onDataChange"
         />
 
+        <label v-if="jsonData.userData"  for="systemPrompt">System Prompt:</label>
+        <textarea
+            v-if="jsonData.userData" 
+            id="systemPrompt"
+            v-model="jsonData.userData.system_prompt"
+            @input="onDataChange"
+            placeholder="Enter detailed system instructions here..."
+        ></textarea>
+
+        <!-- Textarea for Conditions -->
+        <label for="conditions">Conditions:</label>
+        <textarea
+          id="conditions"
+          v-model="conditionsText"
+          @input="updateConditions"
+          placeholder="Enter each condition on a new line"
+        ></textarea>
+
+        <!-- Textarea for Actions -->
+        <label for="actions">Actions:</label>
+        <textarea
+          id="actions"
+          v-model="actionsText"
+          @input="updateActions"
+          placeholder="Enter each action on a new line"
+        ></textarea>
 
     </div>
   </template>
@@ -28,8 +53,12 @@
           name: '',
           userData: {
             system_prompt: '',
+            actions: [], 
+            conditions: [] 
+          },
         },
-        },
+        conditionsText: '',
+        actionsText: '',
       };
     },
     methods: {
@@ -38,6 +67,31 @@
             var data = JSON.parse(JSON.stringify( this.jsonData ));
             this.draw2dFrame.postMessage({ type: 'setShapeData', data: data },'*');
         }
+      },
+      updateConditions() {
+        // Split text by line and update jsonData.userData.conditions
+        this.jsonData.userData.conditions = this.conditionsText?.split('\n') ?? [];
+        this.onDataChange();
+      },
+      updateActions() {
+        // Split text by line and update jsonData.userData.actions
+        this.jsonData.userData.actions = this.actionsText?.split('\n') ?? [];
+        this.onDataChange();
+      },
+    },
+    watch: {
+      // Watch jsonData for changes to update the text areas if jsonData changes
+      'jsonData.userData.conditions': {
+        handler(newConditions) {
+          this.conditionsText = newConditions?.join('\n') ?? "";
+        },
+        immediate: true,
+      },
+      'jsonData.userData.actions': {
+        handler(newActions) {
+          this.actionsText = newActions?.join('\n') ?? "";
+        },
+        immediate: true,
       },
     },
     mounted() {
@@ -56,11 +110,13 @@
   <style scoped>
   .property-view {
     height: 100%;
-    overflow-y: auto; /* Enables vertical scrolling if content exceeds height */
+    overflow-y: auto; 
     padding: 10px;
     background-color: #fafafa;
     border-left: 1px solid #ddd;
-    box-sizing: border-box; /* Ensures padding is included in the height */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
   
 
@@ -80,6 +136,7 @@
   border-radius: 4px;
 }
 
+
 .property-view textarea {
   width: 100%;
   padding: 5px;
@@ -87,6 +144,7 @@
   border-radius: 4px;
   resize: vertical; /* Allows vertical resizing only */
   background-color: #f9f9f9;
+  flex: 1;
 }
   </style>
   

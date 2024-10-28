@@ -19,6 +19,12 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
                 actions: [],
                 conditions: []
               }
+        },
+        {
+            name: this.setName,
+        },
+        {
+            name: this.getName,
         });
         console.log(JSON.stringify(this.getUserData()))
         console.log(this.getUserData())
@@ -45,6 +51,24 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
         this.getUserData().actions = actions
     },
 
+     /**
+      * @method
+      * Set the name of the DB table. Visually it is the header of the shape
+      * 
+      * @param name
+      */
+     setName: function(name)
+     {
+         this.setText(name);
+         return this;
+     },
+      
+      
+     getName: function()
+     {
+         return this.getText();
+     },
+      
     onDrag: function(dx, dy, dx2, dy2, shiftKey, ctrlKey)
     {
         return false;

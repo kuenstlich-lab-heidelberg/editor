@@ -11,7 +11,11 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
                 color:"#d7d7d7", 
                 stroke:1, 
                 gap: 5,
-                radius:3},attr),
+                radius:3,
+                userData: {
+                    system_prompt: ""
+                }
+            },attr),
             extend({
               name: this.setName,
             }, setter),
@@ -164,8 +168,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
             
             if(i>0){ // skip the header of the figure
                 memento.trigger.push({
-                    text:e.figure.getText(),
-                    blah:"dd",
+                    name:e.figure.getName(),
                     conditions: e.figure.getConditions(),
                     actions: e.figure.getActions()
                 });
@@ -190,15 +193,10 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
 
          if(typeof memento.trigger !== "undefined"){
              $.each(memento.trigger, $.proxy(function(i,e){
-                 var trigger =this.addTrigger(e.text);
+                 var trigger =this.addTrigger(e.name ?? "undefined");
                  trigger.setConditions(e.conditions ?? [])
                  trigger.setActions(e.actions ?? [])
              },this));
-         }
-         
-         var userData = this.getUserData();
-         if(userData===null){
-            this.setUserData(userData={system_prompt:""});   
          }
 
          return this;

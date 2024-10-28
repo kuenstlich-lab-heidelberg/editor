@@ -1,7 +1,6 @@
 <template>
     <div class="property-view"  v-if="jsonData.type === 'StateShape'">
         <h3>State</h3>
-        <label for="stateName">Name:</label>
         <input
             id="stateName"
             type="text"

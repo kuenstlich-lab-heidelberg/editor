@@ -53,9 +53,6 @@ app.add_middleware(NoCacheMiddleware)
 @app.post("/api/v1/conversations/")
 async def save_yaml_file(file: UploadFile = File(...)):
     """Speichert eine hochgeladene YAML-Datei im angegebenen Verzeichnis"""
-    if not file.filename.endswith(".json"):
-        raise HTTPException(status_code=400, detail="Es sind nur JSON-Dateien erlaubt")
-    
     file_location = os.path.join(CONVERSATIONS_FILE_DIR, file.filename)
     with open(file_location, "wb") as f:
         f.write(await file.read())
