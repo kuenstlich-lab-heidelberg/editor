@@ -28,6 +28,7 @@
             "dasharray": null,
             "gap": 5,
             "name": "Room_03",
+            "start": false,
             "trigger": []
         },
         {
@@ -36,7 +37,7 @@
             "x": 256,
             "y": 201,
             "width": 92.0546875,
-            "height": 64,
+            "height": 72,
             "alpha": 1,
             "selectable": true,
             "draggable": true,
@@ -52,6 +53,7 @@
             "dasharray": null,
             "gap": 5,
             "name": "Room_01",
+            "start": true,
             "trigger": [
                 {
                     "name": "pick_up_coin",
@@ -86,6 +88,7 @@
             "dasharray": null,
             "gap": 5,
             "name": "Room_02",
+            "start": false,
             "trigger": [
                 {
                     "name": "look_out_to_window",
@@ -93,61 +96,6 @@
                     "actions": []
                 }
             ]
-        },
-        {
-            "type": "TriggerConnection",
-            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
-            "alpha": 1,
-            "selectable": true,
-            "draggable": true,
-            "angle": 0,
-            "userData": {
-                "conditions": [
-                    "coins>5"
-                ]
-            },
-            "cssClass": "TriggerConnection",
-            "stroke": 3,
-            "color": "rgba(145,185,62,1)",
-            "outlineStroke": 1,
-            "outlineColor": "rgba(48,48,48,1)",
-            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
-            "vertex": [
-                {
-                    "x": 348.0546875,
-                    "y": 218.75
-                },
-                {
-                    "x": 432.52734375,
-                    "y": 218.75
-                },
-                {
-                    "x": 432.52734375,
-                    "y": 224.75
-                },
-                {
-                    "x": 517,
-                    "y": 224.75
-                }
-            ],
-            "radius": 3,
-            "routingMetaData": {
-                "routedByUserInteraction": false,
-                "fromDir": 1,
-                "toDir": 3
-            },
-            "source": {
-                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
-                "port": "output0",
-                "name": "Room_01"
-            },
-            "target": {
-                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
-                "port": "input0",
-                "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room_02"
-            },
-            "name": "go_to_room_02"
         },
         {
             "type": "TriggerConnection",
@@ -174,11 +122,11 @@
                     "y": 225.75
                 },
                 {
-                    "x": 1013.03125,
+                    "x": 1021.03125,
                     "y": 225.75
                 },
                 {
-                    "x": 1013.03125,
+                    "x": 1021.03125,
                     "y": 69.25
                 },
                 {
@@ -187,11 +135,11 @@
                 },
                 {
                     "x": 152,
-                    "y": 218.75
+                    "y": 222.75
                 },
                 {
                     "x": 256,
-                    "y": 218.75
+                    "y": 222.75
                 }
             ],
             "radius": 3,
@@ -211,7 +159,7 @@
                 "decoration": "draw2d.decoration.connection.ArrowDecorator",
                 "name": "Room_01"
             },
-            "name": "trigger_name_to_fire"
+            "name": "go_to_room_01"
         },
         {
             "type": "TriggerConnection",
@@ -246,11 +194,11 @@
                 },
                 {
                     "x": 152,
-                    "y": 218.75
+                    "y": 222.75
                 },
                 {
                     "x": 256,
-                    "y": 218.75
+                    "y": 222.75
                 }
             ],
             "radius": 3,
@@ -270,7 +218,7 @@
                 "decoration": "draw2d.decoration.connection.ArrowDecorator",
                 "name": "Room_01"
             },
-            "name": "trigger_name_to_fire"
+            "name": "go_to_room_01"
         },
         {
             "type": "TriggerConnection",
@@ -322,6 +270,61 @@
                 "name": "Room_03"
             },
             "name": "go_to_room_03"
+        },
+        {
+            "type": "TriggerConnection",
+            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {
+                "conditions": [
+                    "coins>5"
+                ]
+            },
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(145,185,62,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(48,48,48,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 348.0546875,
+                    "y": 222.75
+                },
+                {
+                    "x": 432.52734375,
+                    "y": 222.75
+                },
+                {
+                    "x": 432.52734375,
+                    "y": 224.75
+                },
+                {
+                    "x": 517,
+                    "y": 224.75
+                }
+            ],
+            "radius": 3,
+            "routingMetaData": {
+                "routedByUserInteraction": false,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+                "port": "output0",
+                "name": "Room_01"
+            },
+            "target": {
+                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator",
+                "name": "Room_02"
+            },
+            "name": "go_to_room_02"
         }
     ]
 }

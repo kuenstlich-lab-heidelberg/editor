@@ -1,4 +1,4 @@
-initial: blah
+initial: Room_01
 metadata:
   system_prompt: >-
     Wir erkunden gemeinsam den Dungeon, und du kannst dich zwischen
@@ -139,15 +139,7 @@ transitions:
         eine alte Magie verborgen.
       conditions: []
       actions: []
-  - name: go_to_room_02
-    source: Room_01
-    dest: Room_02
-    metadata:
-      system_prompt: ''
-      conditions:
-        - coins>5
-      actions: []
-  - name: trigger_name_to_fire
+  - name: go_to_room_01
     source: Room_03
     dest: Room_01
     metadata:
@@ -155,7 +147,7 @@ transitions:
       conditions:
         - coins >= 3
       actions: []
-  - name: trigger_name_to_fire
+  - name: go_to_room_01
     source: Room_02
     dest: Room_01
     metadata:
@@ -168,4 +160,12 @@ transitions:
     metadata:
       system_prompt: ''
       conditions: []
+      actions: []
+  - name: go_to_room_02
+    source: Room_01
+    dest: Room_02
+    metadata:
+      system_prompt: ''
+      conditions:
+        - coins>5
       actions: []

@@ -26,9 +26,6 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
         {
             name: this.getName,
         });
-        console.log(JSON.stringify(this.getUserData()))
-        console.log(this.getUserData())
-        console.log("---")
     },
 
     getConditions: function()

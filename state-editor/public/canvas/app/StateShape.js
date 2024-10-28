@@ -5,6 +5,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
 	
     init : function(attr, setter, getter)
     {
+        this.start = false
     	this._super(
             extend({
                 bgColor:null, 
@@ -12,24 +13,27 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
                 stroke:1, 
                 gap: 5,
                 radius:3,
+                start: false,
                 userData: {
                     system_prompt: ""
                 }
             },attr),
             extend({
               name: this.setName,
+              start: this.setStart,
             }, setter),
             extend({
               name: this.getName,
+              start: this.getStart,
             }, getter))
             
-      
+        
         this.classLabel = new draw2d.shape.basic.Label({
-            text:"ClassName", 
+            text:"TriggerName", 
             stroke:1,
             fontColor:"#5856d6",  
             bgColor:"#f7f7f7", 
-            radius: 0, 
+            radius: 3, 
             padding:10,
             resizeable:true,
             editor:new draw2d.ui.LabelInplaceEditor()
@@ -38,13 +42,59 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
         // flag which indicates if the figure should read/write ports to
         // JSON
         this.persistPorts = false
-        var input = this.classLabel.createPort("input");
-        var output= this.classLabel.createPort("output");
+        this.classLabel.createPort("input")
+        this.classLabel.createPort("output")
         
         this.add(this.classLabel);
+        this.classLabel.on("contextmenu", (emitter, event)=>{
+            $.contextMenu({
+                selector: 'body', 
+                events:{  
+                    hide:()=> { $.contextMenu( 'destroy' ); }
+                },
+                callback: (key, options) =>{
+                   switch(key){
+                   case "start":
+                       console.log(this);
+                       let cmd = new draw2d.command.CommandAttr(this, {start: true})
+                       this.getCanvas().getCommandStack().execute(cmd)
+                       break;
+                   default:
+                       break;
+                   }
+                },
+                x:event.x,
+                y:event.y,
+                items: {
+                    "start": {name: "Set as Start"}
+                }
+            })
+        })
     },
      
- 
+    setStart: function(flag)
+    {
+        if(flag === this.start){
+            return this
+        }
+
+        if(this.canvas!==null){
+            this.canvas.getFigures().each((i, f)=>{
+                if(f !== this) f.setStart(false)
+            })
+        }
+
+        this.start = flag
+        this.classLabel.attr({stroke: this.start ?5:1})
+
+        return this
+    },
+
+    getStart: function()
+    {
+        return this.start
+    },
+
     /**
      * @method
      * Add an entity to the db shape
@@ -163,9 +213,10 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
         var memento= this._super();
 
         memento.name = this.classLabel.getText();
+        memento.start= this.start
         memento.trigger   = [];
+
         this.children.each(function(i,e){
-            
             if(i>0){ // skip the header of the figure
                 memento.trigger.push({
                     name:e.figure.getName(),
@@ -190,6 +241,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
          this._super(memento);
          
          this.setName(memento.name);
+         this.setStart(memento.start ?? false)
 
          if(typeof memento.trigger !== "undefined"){
              $.each(memento.trigger, $.proxy(function(i,e){

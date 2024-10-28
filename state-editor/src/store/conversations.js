@@ -123,6 +123,11 @@ export default {
             },
           });
 
+          const startStateShape = state.conversationDiagram.find(
+            (shape) => shape.type === "StateShape" && shape.start === true
+          );
+          const startStateName = startStateShape ? startStateShape.name : null;
+          
           // save it as YAML as well for the agent software
           //
           const stateShapes = state.conversationDiagram
@@ -162,7 +167,7 @@ export default {
         
 
           let formatedYaml = yaml.dump({
-            initial: "blah",
+            initial: startStateName,
             metadata: state.conversationConfig,
             states: stateShapes,
             transitions: [...trans, ...trans2]
