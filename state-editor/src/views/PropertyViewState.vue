@@ -65,11 +65,13 @@
   <style scoped>
   .property-view {
     height: 100%;
-    overflow-y: auto; /* Enables vertical scrolling if content exceeds height */
+    overflow-y: auto;
     padding: 10px;
     background-color: #fafafa;
     border-left: 1px solid #ddd;
-    box-sizing: border-box; /* Ensures padding is included in the height */
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
   }
   
 
@@ -96,6 +98,7 @@
   border-radius: 4px;
   resize: vertical; /* Allows vertical resizing only */
   background-color: #f9f9f9;
+  flex: 1;
 }
   </style>
   

@@ -1,6 +1,9 @@
 {
     "config": {
-        "system_prompt": "prompt"
+        "system_prompt": "Wir erkunden gemeinsam den Dungeon, und du kannst dich zwischen verschiedenen Räumen bewegen und mit Objekten \noder Charakteren interagieren, basierend auf deinen Anweisungen.\n\nUm Aktionen auszuführen, stehen mir spezifische \"Trigger\"-Funktionen zur Verfügung, die es uns ermöglichen, \n Dinge wie das Bewegen zwischen Räumen, das Öffnen von Türen, das Aufheben von Gegenständen oder das Interagieren \n mit anderen Charakteren durchzuführen. Diese Trigger werden nur dann eingesetzt, wenn du mich explizit darum \n bittest oder deine Aussage klar darauf hindeutet, dass eine bestimmte Handlung gewünscht ist. Falls Unklarheiten \n bestehen, werde ich nachfragen, bevor ich etwas unternehme. Ich handle also nie allein und orientiere mich \n immer an deinen Vorgaben.\n\nEbenso kann ich \"Expressions\" nutzen, um zu zeigen, wie ich auf das Geschehen reagiere – dabei steht unser \ngemeinsames Abenteuer im Mittelpunkt.\n\nEs ist wichtig, dass wir alle Entscheidungen zusammen treffen, während wir den Dungeon erkunden und die \nGeheimnisse lüften. Ich folge deiner Führung und sorge dafür, dass alles nach deinem Willen abläuft, \nwährend wir gemeinsam die Herausforderungen meistern.",
+        "inventory": {
+            "kjj": "jkkkkkk"
+        }
     },
     "diagram": [
         {
@@ -14,7 +17,9 @@
             "selectable": true,
             "draggable": true,
             "angle": 0,
-            "userData": {},
+            "userData": {
+                "system_prompt": "You are now in the \"room 3\" of the building. This is important if the user asked for.\n\nDieser kleine, enge Raum ist gefüllt mit alchemistischen Werkzeugen und geheimnisvollen Substanzen. Ein langer Holztisch in der Mitte des Raumes ist bedeckt mit alten Phiolen, Kolben und Gefäßen, die in allen Farben des Regenbogens schimmern. Die Luft ist erfüllt von einem starken, krautigen Geruch, und von einer Ecke des Raumes steigt ein dünner Rauchschwaden aus einem Kessel auf, der über einem schwachen blauen Feuer schwebt. Die Wände des Raumes sind mit Regalen voller seltsamer Zutaten behängt – getrocknete Kräuter, seltsam geformte Kristalle und Flaschen mit trübem, brodelndem Inhalt. Über dem Tisch hängt ein \nantikes, leicht flackerndes Licht, das den Raum in ein geheimnisvolles, aber auch einladendes Licht taucht. Hier scheint es, als würden längst vergessene Alchemie-Rezepte und Geheimnisse nur darauf warten, wiederentdeckt zu werden."
+            },
             "cssClass": "StateShape",
             "bgColor": "rgba(0,0,0,0)",
             "color": "rgba(215,215,215,1)",
@@ -26,26 +31,32 @@
             "trigger": [
                 {
                     "text": "id",
-                    "id": "49be7d78-4dcf-38ab-3733-b4108701f1"
+                    "blah": "dd",
+                    "conditions": [],
+                    "actions": []
                 },
                 {
                     "text": "employee_fk",
-                    "id": "49be7d78-4dcf-38ab-3733-b4108701fce4"
+                    "blah": "dd",
+                    "conditions": [],
+                    "actions": []
                 }
             ]
         },
         {
             "type": "StateShape",
             "id": "3253ff2a-a920-09d5-f033-ca759a778e19",
-            "x": 170,
-            "y": 78,
+            "x": 131,
+            "y": 53,
             "width": 88.7109375,
-            "height": 92.525390625,
+            "height": 64.025390625,
             "alpha": 1,
             "selectable": true,
             "draggable": true,
             "angle": 0,
-            "userData": {},
+            "userData": {
+                "system_prompt": "You are now in the \"room 1\" of the building. This is important if the user asked for.\n\nDu befindest dich in einer alten, verstaubten Bibliothek. Die hohen Wände sind von oben bis unten mit endlosen Reihen verstaubter Bücherregale bedeckt, die bis zur Decke reichen. Das schwache Licht von einer zerbrochenen Lampe flackert an der Decke und wirft tanzende \nSchatten auf den Boden. Die Luft riecht nach alten, vergessenen Geschichten und Tinte. Im hinteren Teil des Raumes steht ein schwerer, hölzerner Schreibtisch, auf dem ein dickes, in Leder gebundenes Buch liegt, dessen Seiten immer noch sanft rascheln, als ob sie von einer \nunsichtbaren Hand umgeblättert würden. Neben dem Schreibtisch befindet sich ein Kamin, in dem schwach glühende Kohlen die einzige Wärmequelle des Raumes darstellen. Es gibt das Gefühl, dass dieser Raum einst viele Geheimnisse bewahrt hat und darauf wartet, dass jemand sie entdeckt.\n"
+            },
             "cssClass": "StateShape",
             "bgColor": "rgba(0,0,0,0)",
             "color": "rgba(215,215,215,1)",
@@ -57,19 +68,17 @@
             "trigger": [
                 {
                     "text": "pick_up_key",
-                    "id": "8d410fef-5c6e-286d-c9c3-c152d5bd9c52"
-                },
-                {
-                    "text": "_new_",
-                    "id": "be237b35-d644-222f-c8b0-822a3b96851f"
+                    "blah": "dd",
+                    "conditions": [],
+                    "actions": []
                 }
             ]
         },
         {
             "type": "StateShape",
             "id": "2810494b-931f-da59-fd9d-6deba4385fe0",
-            "x": 173,
-            "y": 292,
+            "x": 458,
+            "y": 301,
             "width": 74.03125,
             "height": 64,
             "alpha": 1,
@@ -77,7 +86,7 @@
             "draggable": true,
             "angle": 0,
             "userData": {
-                "system_prompt": "test test test test "
+                "system_prompt": "You are now in teh \"room 2\" of the building. This is important if the user asked for.\n\nDiese weite, steinerne Halle war einst prächtig, ist aber jetzt fast komplett zerfallen. Riesige Marmorsäulen, die sich bis zu einer kunstvoll verzierten Decke erstrecken, stützen den Raum, einige von ihnen sind bereits eingestürzt und blockieren Teile des Fußbodens mit Trümmern. Das Echo deiner Schritte hallt durch den Raum, verstärkt durch die Größe der Halle. \nIn der Mitte des Raumes steht ein riesiger Brunnen aus schwarzem Marmor, dessen Wasser längst versiegt ist. Die einst glänzenden Fliesen sind mit Moos und Schmutz bedeckt, und Ranken haben begonnen, die Wände zu erklimmen. Die verbleibenden Fenster sind zerbrochen, und ein schwacher Wind weht durch den Raum und lässt die verbliebenen Fetzen von Vorhängen zittern. Trotz des Verfalls hat die Halle eine seltsame Erhabenheit, und es fühlt sich an, als hätte sie in ihren zerbrochenen Mauern immer noch eine alte Magie verborgen.\n"
             },
             "cssClass": "StateShape",
             "bgColor": "rgba(0,0,0,0)",
@@ -90,9 +99,60 @@
             "trigger": [
                 {
                     "text": "id",
-                    "id": "e04ebb27-43c9-1afa-a7d0-e55bf2aa62d5"
+                    "blah": "dd",
+                    "conditions": [],
+                    "actions": []
                 }
             ]
+        },
+        {
+            "type": "TriggerConnection",
+            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {},
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(145,185,62,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(48,48,48,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 219.7109375,
+                    "y": 70.75
+                },
+                {
+                    "x": 334.85546875,
+                    "y": 70.75
+                },
+                {
+                    "x": 334.85546875,
+                    "y": 318.75
+                },
+                {
+                    "x": 458,
+                    "y": 318.75
+                }
+            ],
+            "radius": 3,
+            "routingMetaData": {
+                "routedByUserInteraction": true,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+                "port": "output0"
+            },
+            "target": {
+                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator"
+            },
+            "name": "go_to_room_02"
         },
         {
             "type": "TriggerConnection",
@@ -110,12 +170,12 @@
             "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
             "vertex": [
                 {
-                    "x": 247.03125,
-                    "y": 309.75
+                    "x": 532.03125,
+                    "y": 318.75
                 },
                 {
                     "x": 759.06640625,
-                    "y": 309.75
+                    "y": 318.75
                 },
                 {
                     "x": 759.06640625,
@@ -142,63 +202,6 @@
                 "decoration": "draw2d.decoration.connection.ArrowDecorator"
             },
             "name": "go_to_room_03"
-        },
-        {
-            "type": "TriggerConnection",
-            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
-            "alpha": 1,
-            "selectable": true,
-            "draggable": true,
-            "angle": 0,
-            "userData": {},
-            "cssClass": "TriggerConnection",
-            "stroke": 3,
-            "color": "rgba(145,185,62,1)",
-            "outlineStroke": 1,
-            "outlineColor": "rgba(48,48,48,1)",
-            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
-            "vertex": [
-                {
-                    "x": 258.7109375,
-                    "y": 95.75
-                },
-                {
-                    "x": 278.7109375,
-                    "y": 95.75
-                },
-                {
-                    "x": 278.7109375,
-                    "y": 202.75
-                },
-                {
-                    "x": 153,
-                    "y": 202.75
-                },
-                {
-                    "x": 153,
-                    "y": 309.75
-                },
-                {
-                    "x": 173,
-                    "y": 309.75
-                }
-            ],
-            "radius": 3,
-            "routingMetaData": {
-                "routedByUserInteraction": false,
-                "fromDir": 1,
-                "toDir": 3
-            },
-            "source": {
-                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
-                "port": "output0"
-            },
-            "target": {
-                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
-                "port": "input0",
-                "decoration": "draw2d.decoration.connection.ArrowDecorator"
-            },
-            "name": "go_to_room_02"
         }
     ]
 }

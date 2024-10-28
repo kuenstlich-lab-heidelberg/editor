@@ -5,6 +5,7 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
 
     init:function(txt)
     {
+
       this._super({
             text:txt,
             radius:10,
@@ -13,15 +14,39 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
             bgColor: "#eeb5dd",
             color : "#d44aa8",
             resizeable:true,
-            editor:new draw2d.ui.LabelEditor()
+            editor:new draw2d.ui.LabelEditor(),
+            userData: {
+                actions: [],
+                conditions: []
+              }
         });
+        console.log(JSON.stringify(this.getUserData()))
+        console.log(this.getUserData())
+        console.log("---")
     },
 
-      
+    getConditions: function()
+    {
+        return this.getUserData().conditions
+    },
+
+    setConditions: function(conditions)
+    {
+        this.getUserData().conditions = conditions
+    },
+
+    getActions: function()
+    {
+        return this.getUserData().actions
+    },
+
+    setActions: function(actions)
+    {
+        this.getUserData().actions = actions
+    },
+
     onDrag: function(dx, dy, dx2, dy2, shiftKey, ctrlKey)
     {
         return false;
     },
-
-
 });

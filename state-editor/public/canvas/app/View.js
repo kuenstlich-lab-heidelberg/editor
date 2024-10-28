@@ -13,12 +13,10 @@ View = draw2d.Canvas.extend({
     
         this.getCommandStack().addEventListener((e)=>{
             if(e.isPostChangeEvent()){
-                console.log("chagned....")
                 var writer = new draw2d.io.json.Writer();
                 writer.marshal(this, function(json){
                     if( json.length ===0)
                         return
-                    console.log(json)
                     window.parent.postMessage({ type: 'updateDocumentData', data: json }, '*');
                 });                
             }
@@ -53,20 +51,23 @@ View = draw2d.Canvas.extend({
     setShapeData: function(data){
         var shape = this.getFigure(data.id)
         if(shape){
-            console.log("found", shape)
             shape.attr(data)
-            return this
         }
-
-
-        shape = this.getLine(data.id)
-        if(shape){
-            shape.attr( {
-                name: data.name,
-                userData: data.userData
-            })
-            return this
+        else {
+            shape = this.getLine(data.id)
+            if(shape){
+                shape.attr( {
+                    name: data.name,
+                    userData: data.userData
+                })
+            }
         }
+        var writer = new draw2d.io.json.Writer();
+        writer.marshal(this, function(json){
+            if( json.length ===0)
+                return
+            window.parent.postMessage({ type: 'updateDocumentData', data: json }, '*');
+        });                
 
         return this
     },

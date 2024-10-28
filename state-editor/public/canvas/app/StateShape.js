@@ -165,7 +165,9 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
             if(i>0){ // skip the header of the figure
                 memento.trigger.push({
                     text:e.figure.getText(),
-                    id: e.figure.id
+                    blah:"dd",
+                    conditions: e.figure.getConditions(),
+                    actions: e.figure.getActions()
                 });
             }
         });
@@ -189,7 +191,8 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
          if(typeof memento.trigger !== "undefined"){
              $.each(memento.trigger, $.proxy(function(i,e){
                  var trigger =this.addTrigger(e.text);
-                 trigger.id = e.id;
+                 trigger.setConditions(e.conditions ?? [])
+                 trigger.setActions(e.actions ?? [])
              },this));
          }
          

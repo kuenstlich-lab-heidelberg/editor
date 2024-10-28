@@ -6,7 +6,10 @@ export default {
   namespaced: true,
   state: {
     conversations: [],
-    conversationConfig: [],
+    conversationConfig: {
+      system_prompt: "prompt",
+      inventory: [],
+    },
     conversationDiagram: [],
     conversationName: "unknown.json",
     loading: false,
@@ -18,7 +21,15 @@ export default {
     },
     SET_CONVERSATION_CONFIG(state, data) {
       state.conversationConfig = data;
-      console.log(data)
+    },
+    ADD_INVENTORY_ITEM(state, item) {
+      state.conversationConfig.inventory.push(item);
+    },
+    UPDATE_INVENTORY_ITEM(state, { index, item }) {
+      state.conversationConfig.inventory.splice(index, 1, item);
+    },
+    REMOVE_INVENTORY_ITEM(state, index) {
+      state.conversationConfig.inventory.splice(index, 1);
     },
     SET_CONVERSATION_DIAGRAM(state, data) {
       state.conversationDiagram = data;
@@ -76,10 +87,17 @@ export default {
     },
 
     async updateConversationConfig({ commit }, data) {
-      console.log("config", data)
       commit('SET_CONVERSATION_CONFIG', data);
     },
-
+    addInventoryItem({ commit }, item) {
+      commit('ADD_INVENTORY_ITEM', item);
+    },
+    updateInventoryItem({ commit }, { index, item }) {
+      commit('UPDATE_INVENTORY_ITEM', { index, item });
+    },
+    removeInventoryItem({ commit }, index) {
+      commit('REMOVE_INVENTORY_ITEM', index);
+    },
     async updateConversationDiagram({ commit }, data) {
       commit('SET_CONVERSATION_DIAGRAM', data);
     },
@@ -87,7 +105,6 @@ export default {
     async saveConversation({ commit,state }) {
         commit('SET_LOADING', true);
         commit('SET_ERROR', null);
-        console.log("save",state.conversationConfig)
         try {
           const formattedJson = JSON.stringify({
             "config": state.conversationConfig,
