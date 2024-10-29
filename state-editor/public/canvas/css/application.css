@@ -28,3 +28,37 @@ body {
 	left: 0px;
 	background-color: #FFFFFF;
 }
+
+
+#canvas_zoom{
+	position: fixed;
+	bottom: 20px;
+	right:  20px;
+	border-radius:5px;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
+#canvas_zoom > button {
+	background-color:transparent;
+	font-weight:100;
+	font-size: 12px;
+	border-radius:5px;
+	padding:5px;
+	padding-left:10px;
+	padding-right:10px;
+	border-width:1px;
+	border-style: solid;
+	outline:none;
+	transition: all 0.5s;
+	margin: 2px;
+}
+
+#canvas_zoom > button:hover {
+	border-width:1px;
+	border-style: solid;
+}
+	
+  
+  

@@ -139,24 +139,16 @@ transitions:
         eine alte Magie verborgen.
       conditions: []
       actions: []
-  - name: go_to_room_01
-    source: Room_03
-    dest: Room_01
-    metadata:
-      system_prompt: system prompt for the move from 03 to 01
-      conditions:
-        - coins >= 3
-      actions: []
-  - name: go_to_room_01
+  - name: go_to_room_03
     source: Room_02
-    dest: Room_01
+    dest: Room_03
     metadata:
       system_prompt: ''
       conditions: []
       actions: []
-  - name: go_to_room_03
+  - name: go_to_room_01
     source: Room_02
-    dest: Room_03
+    dest: Room_01
     metadata:
       system_prompt: ''
       conditions: []
@@ -168,4 +160,12 @@ transitions:
       system_prompt: ''
       conditions:
         - coins>5
+      actions: []
+  - name: go_to_room_01
+    source: Room_03
+    dest: Room_01
+    metadata:
+      system_prompt: system prompt for the move from 03 to 01
+      conditions:
+        - coins >= 3
       actions: []

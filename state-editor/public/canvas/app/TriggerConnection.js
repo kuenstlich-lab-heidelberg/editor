@@ -20,6 +20,7 @@ var TriggerConnection= draw2d.Connection.extend({
                 outlineStroke:1,
                 outlineColor:"#303030",
                 color:"91B93E",
+                radius: 20,
                 router:routerToUse
             }, attr),
             extend({
@@ -78,8 +79,7 @@ var TriggerConnection= draw2d.Connection.extend({
         memento.name = this.getName();
         memento.source.name= this.getSource().getParent().getText()
         memento.target.name= this.getTarget().getParent().getText()
-        console.log("CONNECTION")
-        //debugger
+
         return memento;
      },
      

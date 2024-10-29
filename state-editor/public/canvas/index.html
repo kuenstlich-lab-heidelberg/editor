@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded",function () {
     var app  = new Application();
 
       function receiveMessage(event) {
-        console.log("EVENT_IN_DRAW2D")
 
         if (event.origin !== window.location.origin) return;
 
@@ -58,6 +57,8 @@ document.addEventListener("DOMContentLoaded",function () {
             var reader = new draw2d.io.json.Reader();
             app.view.clear();
             reader.unmarshal(app.view, conversationJson);
+            console.log("setDocument")
+            app.view.centerDocument()
         }
         else if (message.type === 'setShapeData') {
           app.view.setShapeData(message.data)
@@ -73,5 +74,12 @@ document.addEventListener("DOMContentLoaded",function () {
 
 <body id="container">
    <div id="canvas"></div>
+
+   <div id="canvas_zoom">
+    <button type="button" id="canvas_zoom_in"     >&#8210;</button>
+    <button type="button" id="canvas_zoom_normal" >100%</button>
+    <button type="button" id="canvas_zoom_out"    >&#xFF0B</button>
+  </div>
+
 </body>
 </html>

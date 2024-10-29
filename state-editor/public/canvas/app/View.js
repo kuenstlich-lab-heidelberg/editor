@@ -21,12 +21,33 @@ View = draw2d.Canvas.extend({
                 });                
             }
         });
+
+        let setZoom = (newZoom) => {
+            let bb = this.getBoundingBox().getCenter()
+            let c = $("#container")
+            this.setZoom(newZoom)
+            this.scrollTo((bb.y / newZoom - c.height() / 2), (bb.x / newZoom - c.width() / 2))
+        }
+      
+        // ZoomIn Button and the callbacks
+        $("#canvas_zoom_in").on("click", () => {
+            setZoom(this.getZoom() * 1.2)
+        })
+    
+        // OneToOne Button
+        $("#canvas_zoom_normal").on("click", () => {
+            setZoom(1.0)
+        })
+    
+        //ZoomOut Button and the callback
+        $("#canvas_zoom_out").on("click", () => { 
+            setZoom(this.getZoom() * 0.8)
+        })  
 	},
 
     getFigure: function(id)
     {
         let result = null
-
         this.getFigures().each( (i, figure)=> {
             if(result !== null){
                 return false
@@ -36,7 +57,6 @@ View = draw2d.Canvas.extend({
                 return false
             }
             figure.children.each(function (i, entry) {
-                console.log("entry", entry)
                 let child = entry.figure
                 if(child.id === id ){
                     result = child;
@@ -44,11 +64,12 @@ View = draw2d.Canvas.extend({
                 }
               })
         });
-        console.log(result)
         return result
     },
 
-    setShapeData: function(data){
+
+    setShapeData: function(data)
+    {
         var shape = this.getFigure(data.id)
         if(shape){
             shape.attr(data)
@@ -70,6 +91,49 @@ View = draw2d.Canvas.extend({
         });                
 
         return this
+    },
+
+    getBoundingBox: function () 
+    {
+        let xCoords = []
+        let yCoords = []
+        this.getFigures().each( (i, f) => {
+          let b = f.getBoundingBox()
+          xCoords.push(b.x, b.x + b.w)
+          yCoords.push(b.y, b.y + b.h)
+        })
+        this.getLines().each((i, f) => {
+          let b = f.getBoundingBox()
+          xCoords.push(b.x, b.x + b.w)
+          yCoords.push(b.y, b.y + b.h)
+        })
+        let minX = Math.min.apply(Math, xCoords)
+        let minY = Math.min.apply(Math, yCoords)
+        let width = Math.max(100, Math.max.apply(Math, xCoords) - minX)
+        let height = Math.max(100, Math.max.apply(Math, yCoords) - minY)
+    
+        return new draw2d.geo.Rectangle(minX, minY, width, height)
+    },
+
+
+    centerDocument: function () 
+    {
+        this.setZoom(1.0)
+    
+        let c = $("#container")
+        if (this.getFigures().getSize() > 0) {
+          // get the bounding box of the document and translate the complete document
+          // into the center of the canvas. Scroll to the top left corner after them
+          //
+          let bb = this.getBoundingBox()
+          this.scrollTo(bb.y - c.height() / 2 + bb.h / 2, bb.x - c.width() / 2 + bb.w / 2)
+        } else {
+          let bb = {
+            x: this.getWidth() / 2,
+            y: this.getHeight() / 2
+          }
+          this.scrollTo(bb.y - c.height() / 2, bb.x - c.width() / 2)
+        }
     },
 
     /**
