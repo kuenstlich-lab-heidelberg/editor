@@ -1,4 +1,18 @@
 
+let NORMAL_STYLE = {
+    stroke:1,
+    fontColor:"#4f4f4f",  
+    bgColor:"#add6f5", 
+    color: "#349be8",
+}
+
+let START_STYLE = {
+    stroke:2,
+    fontColor:"#6f6f6f",  
+    bgColor:"#c3bae5", 
+    color: "#654cb7",
+}
+
 StateShape = draw2d.shape.layout.VerticalLayout.extend({
 
 	NAME: "StateShape",
@@ -6,6 +20,15 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
     init : function(attr, setter, getter)
     {
         this.start = false
+        this.classLabel = new draw2d.shape.basic.Label({
+            text:"TriggerName", 
+            ...NORMAL_STYLE,
+            radius: 10, 
+            padding:10,
+            resizeable:true,
+            editor:new draw2d.ui.LabelInplaceEditor()
+        })
+  
     	this._super(
             extend({
                 bgColor:null, 
@@ -26,19 +49,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
               name: this.getName,
               start: this.getStart,
             }, getter))
-            
-        
-        this.classLabel = new draw2d.shape.basic.Label({
-            text:"TriggerName", 
-            stroke:1,
-            fontColor:"#5856d6",  
-            bgColor:"#f7f7f7", 
-            radius: 3, 
-            padding:10,
-            resizeable:true,
-            editor:new draw2d.ui.LabelInplaceEditor()
-        });
-       
+                 
         // flag which indicates if the figure should read/write ports to
         // JSON
         this.persistPorts = false
@@ -54,19 +65,32 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
                 },
                 callback: (key, options) =>{
                    switch(key){
-                   case "start":
-                       console.log(this);
-                       let cmd = new draw2d.command.CommandAttr(this, {start: true})
-                       this.getCanvas().getCommandStack().execute(cmd)
+                   case "delete":
+                       this.getCanvas().getCommandStack().execute(
+                            new draw2d.command.CommandDelete(this)
+                        )
                        break;
-                   default:
+                    case "add":
+                        setTimeout(()=>{
+                            this.addTrigger("_new_").onDoubleClick();
+                        },10);
+                        break;
+                    case "start":
+                        this.getCanvas().getCommandStack().execute(
+                            new draw2d.command.CommandAttr(this, {start: true})
+                        )
+                    break;
+                    default:
                        break;
                    }
                 },
                 x:event.x,
                 y:event.y,
                 items: {
-                    "start": {name: "Set as Start"}
+                    "start": {name: "Set Start Node"},
+                    "add": {name: "Add Trigger"},
+                    "sep1": "---------",
+                    "delete": {name: "Delete"},
                 }
             })
         })
@@ -85,7 +109,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
         }
 
         this.start = flag
-        this.classLabel.attr({stroke: this.start ?5:1})
+        this.classLabel.attr(this.start ?START_STYLE:NORMAL_STYLE)
 
         return this
     },
@@ -140,10 +164,9 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
                  y:event.y,
                  items: 
                  {
-                     "rename": {name: "Rename"},
-                     "new":    {name: "New Trigger"},
+                     "rename": {name: "Rename Trigger"},
                      "sep1":   "---------",
-                     "delete": {name: "Delete"}
+                     "delete": {name: "Delete Trigger"}
                  }
              });
          });

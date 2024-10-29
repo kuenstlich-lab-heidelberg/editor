@@ -15,6 +15,7 @@
 
   <script src="./app/Application.js"></script>
   <script src="./app/View.js"></script>
+  <script src="./app/Toolbar.js"></script>
   <script src="./app/TriggerLabel.js"></script>
   <script src="./app/TriggerConnection.js"></script>
   <script src="./app/StateShape.js"></script>
@@ -73,9 +74,14 @@ document.addEventListener("DOMContentLoaded",function () {
 </head>
 
 <body id="container">
-   <div id="canvas"></div>
+  <div id="canvas"></div>
 
-   <div id="canvas_zoom">
+
+  <div id="canvas_toolbar">
+    
+  </div>
+
+  <div id="canvas_zoom">
     <button type="button" id="canvas_zoom_in"     >&#8210;</button>
     <button type="button" id="canvas_zoom_normal" >100%</button>
     <button type="button" id="canvas_zoom_out"    >&#xFF0B</button>

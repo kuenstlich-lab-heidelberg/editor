@@ -10,7 +10,9 @@
               v-for="item in navigationItems"
               :key="item.title"
               :to="item.route"
+              :prepend-icon="item.icon"
               router>
+
               <v-list-item-content>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item-content>
@@ -38,8 +40,9 @@
     data() {
       return {
         navigationItems: [
-          { title: 'Configuration', route: '/configuration' },
-          { title: 'Diagram', route: '/diagram' },
+          { title: 'Sceen Setup',  route: '/configuration' , icon: 'mdi-cog'},
+          { title: 'Inventory',    route: '/inventory'     , icon: 'mdi-hand-coin-outline'},
+          { title: 'State Engine', route: '/diagram'       , icon:'mdi-state-machine' },
         ],
       };
     },

@@ -8,12 +8,12 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
 
       this._super({
             text:txt,
-            radius:10,
             padding:{left:10, top:3, right:10, bottom:5},
-            fontColor:"#4a4a4a",
-            bgColor: "#eeb5dd",
-            color : "#d44aa8",
             resizeable:true,
+            radius: 10,
+            fontColor:"#8f9f84",
+            bgColor: "#cce5bc",
+            color : "#7fc256",
             editor:new draw2d.ui.LabelEditor(),
             userData: {
                 actions: [],

@@ -18,8 +18,8 @@ var TriggerConnection= draw2d.Connection.extend({
                 targetDecorator: new draw2d.decoration.connection.ArrowDecorator(),
                 stroke:3,
                 outlineStroke:1,
-                outlineColor:"#303030",
-                color:"91B93E",
+                outlineColor:"#7fc256",
+                color:"#cce5bc",
                 radius: 20,
                 router:routerToUse
             }, attr),
@@ -34,11 +34,10 @@ var TriggerConnection= draw2d.Connection.extend({
       //
       this.label = new draw2d.shape.basic.Label({
           text:"trigger_name_to_fire",
-          color:"#0d0d0d",
           radius: 10,
-          fontColor:"#0d0d0d",
-          bgColor: "#eeb5dd",
-          color : "#d44aa8"
+          fontColor:"#8f9f84",
+          bgColor: "#cce5bc",
+          color : "#7fc256"
       });
       
       // add the new decoration to the connection with a position locator.
@@ -65,6 +64,36 @@ var TriggerConnection= draw2d.Connection.extend({
         return this.label.getText();
     },
       
+    onContextMenu:function(x,y){
+
+        $.contextMenu({
+            selector: 'body',
+            events:
+            {
+                hide:function(){ $.contextMenu( 'destroy' ); }
+            },
+            callback: function(key, options)
+            {
+               switch(key){
+               case "delete":
+                   this.getCanvas().getCommandStack().execute(
+                    new draw2d.command.CommandDelete(this)
+                   );
+               default:
+                   break;
+               }
+
+            }.bind(this),
+            x:x,
+            y:y,
+            items:
+            {
+                "delete": {name: "Delete"}
+            }
+        });
+
+    },
+
      /**
       * @method 
       * Return an objects with all important attributes for XML or JSON serialization

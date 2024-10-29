@@ -134,14 +134,16 @@ export default {
             .filter((item) => item.type === "StateShape")
             .map((shape) => ({
               name: shape.name,
-              system_prompt: (shape.userData?.system_prompt ?? "").trim(),
+              metadata: {
+                system_prompt: (shape.userData?.system_prompt ?? "").trim(),
+              },
             }));
 
           const trans = state.conversationDiagram
           .filter((shape) => shape.type === "StateShape" && shape.trigger && shape.trigger.length > 0) // Find StateShapes with triggers
           .flatMap((shape) => 
             shape.trigger.map((trigger) => ({
-              name: trigger.name,
+              trigger: trigger.name,
               source: shape.name,
               dest: shape.name,
               metadata: {
@@ -155,7 +157,7 @@ export default {
           const trans2 = state.conversationDiagram
           .filter((item) => item.type === "TriggerConnection") // Filter only TriggerConnection shapes
           .map((triggerConnection) => ({
-            name: triggerConnection.name,
+            trigger: triggerConnection.name,
             source: triggerConnection.source.name, // Directly use the source name
             dest: triggerConnection.target.name,   // Directly use the target name
             metadata: {

@@ -30,6 +30,19 @@ body {
 }
 
 
+#canvas_toolbar {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	background-color:rgb(230, 245, 240);
+	padding: 10px;
+}
+
+
 #canvas_zoom{
 	position: fixed;
 	bottom: 20px;

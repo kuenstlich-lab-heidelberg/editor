@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import StateCanvas from '../views/StateCanvas.vue';
 import Configuration from '../views/Configuration.vue';
+import Inventory from '../views/Inventory.vue';
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/configuration',
     name: 'configuration',
     component: Configuration
+  },
+  {
+    path: '/inventory',
+    name: 'inventory',
+    component: Inventory
   }
 ];
 

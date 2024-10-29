@@ -11,7 +11,7 @@
             "id": "63c0f27a-716e-804c-6873-cd99b945b63f",
             "x": 1319.8960000000002,
             "y": 840.448,
-            "width": 74.03125,
+            "width": 67.359375,
             "height": 35.5,
             "alpha": 1,
             "selectable": true,
@@ -27,17 +27,17 @@
             "radius": 3,
             "dasharray": null,
             "gap": 5,
-            "name": "Room_03",
+            "name": "Room03",
             "start": false,
             "trigger": []
         },
         {
             "type": "StateShape",
             "id": "3253ff2a-a920-09d5-f033-ca759a778e19",
-            "x": 656.896,
-            "y": 833.448,
+            "x": 657.896,
+            "y": 912.448,
             "width": 92.0546875,
-            "height": 72,
+            "height": 66,
             "alpha": 1,
             "selectable": true,
             "draggable": true,
@@ -52,7 +52,7 @@
             "radius": 3,
             "dasharray": null,
             "gap": 5,
-            "name": "Room_01",
+            "name": "Room01",
             "start": true,
             "trigger": [
                 {
@@ -69,8 +69,8 @@
         {
             "type": "StateShape",
             "id": "2810494b-931f-da59-fd9d-6deba4385fe0",
-            "x": 917.8960000000002,
-            "y": 839.448,
+            "x": 1078.8960000000002,
+            "y": 963.4479999999999,
             "width": 130.75,
             "height": 64,
             "alpha": 1,
@@ -87,7 +87,7 @@
             "radius": 3,
             "dasharray": null,
             "gap": 5,
-            "name": "Room_02",
+            "name": "Room02",
             "start": false,
             "trigger": [
                 {
@@ -107,21 +107,21 @@
             "userData": {},
             "cssClass": "TriggerConnection",
             "stroke": 3,
-            "color": "rgba(145,185,62,1)",
+            "color": "rgba(204,229,188,1)",
             "outlineStroke": 1,
-            "outlineColor": "rgba(48,48,48,1)",
+            "outlineColor": "rgba(127,194,86,1)",
             "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
             "vertex": [
                 {
-                    "x": 1048.6460000000002,
-                    "y": 857.198
+                    "x": 1209.6460000000002,
+                    "y": 981.1979999999999
                 },
                 {
-                    "x": 1160.962406249999,
-                    "y": 857.198
+                    "x": 1259.6460000000002,
+                    "y": 981.1979999999999
                 },
                 {
-                    "x": 1160.962406249999,
+                    "x": 1259.6460000000002,
                     "y": 858.198
                 },
                 {
@@ -138,13 +138,13 @@
             "source": {
                 "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
                 "port": "output0",
-                "name": "Room_02"
+                "name": "Room02"
             },
             "target": {
                 "node": "63c0f27a-716e-804c-6873-cd99b945b63f",
                 "port": "input0",
                 "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room_03"
+                "name": "Room03"
             },
             "name": "go_to_room_03"
         },
@@ -158,21 +158,21 @@
             "userData": {},
             "cssClass": "TriggerConnection",
             "stroke": 3,
-            "color": "rgba(145,185,62,1)",
+            "color": "rgba(204,229,188,1)",
             "outlineStroke": 1,
-            "outlineColor": "rgba(48,48,48,1)",
+            "outlineColor": "rgba(127,194,86,1)",
             "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
             "vertex": [
                 {
-                    "x": 1048.6460000000002,
-                    "y": 857.198
+                    "x": 1209.6460000000002,
+                    "y": 981.1979999999999
                 },
                 {
-                    "x": 1093.645999999999,
-                    "y": 857.198
+                    "x": 1259.6460000000002,
+                    "y": 981.1979999999999
                 },
                 {
-                    "x": 1093.645999999999,
+                    "x": 1259.6460000000002,
                     "y": 1097.6980000000008
                 },
                 {
@@ -181,11 +181,11 @@
                 },
                 {
                     "x": 552.8959999999996,
-                    "y": 855.198
+                    "y": 931.198
                 },
                 {
-                    "x": 656.896,
-                    "y": 855.198
+                    "x": 657.896,
+                    "y": 931.198
                 }
             ],
             "radius": 20,
@@ -197,13 +197,13 @@
             "source": {
                 "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
                 "port": "output0",
-                "name": "Room_02"
+                "name": "Room02"
             },
             "target": {
                 "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
                 "port": "input0",
                 "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room_01"
+                "name": "Room01"
             },
             "name": "go_to_room_01"
         },
@@ -221,26 +221,26 @@
             },
             "cssClass": "TriggerConnection",
             "stroke": 3,
-            "color": "rgba(145,185,62,1)",
+            "color": "rgba(204,229,188,1)",
             "outlineStroke": 1,
-            "outlineColor": "rgba(48,48,48,1)",
+            "outlineColor": "rgba(127,194,86,1)",
             "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
             "vertex": [
                 {
-                    "x": 748.9506875,
-                    "y": 855.198
+                    "x": 749.9506875,
+                    "y": 931.198
                 },
                 {
-                    "x": 833.4233437500001,
-                    "y": 855.198
+                    "x": 890.4233437500001,
+                    "y": 931.198
                 },
                 {
-                    "x": 833.4233437500001,
-                    "y": 857.198
+                    "x": 890.4233437500001,
+                    "y": 981.1979999999999
                 },
                 {
-                    "x": 917.8960000000002,
-                    "y": 857.198
+                    "x": 1078.8960000000002,
+                    "y": 981.1979999999999
                 }
             ],
             "radius": 20,
@@ -252,13 +252,13 @@
             "source": {
                 "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
                 "port": "output0",
-                "name": "Room_01"
+                "name": "Room01"
             },
             "target": {
                 "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
                 "port": "input0",
                 "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room_02"
+                "name": "Room02"
             },
             "name": "go_to_room_02"
         },
@@ -277,13 +277,13 @@
             },
             "cssClass": "TriggerConnection",
             "stroke": 3,
-            "color": "rgba(145,185,62,1)",
+            "color": "rgba(204,229,188,1)",
             "outlineStroke": 1,
-            "outlineColor": "rgba(48,48,48,1)",
+            "outlineColor": "rgba(127,194,86,1)",
             "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
             "vertex": [
                 {
-                    "x": 1393.9272500000002,
+                    "x": 1387.2553750000002,
                     "y": 858.198
                 },
                 {
@@ -292,19 +292,19 @@
                 },
                 {
                     "x": 1421.9272499999986,
-                    "y": 701.6979999999994
+                    "y": 674.0979999999992
                 },
                 {
                     "x": 552.8959999999996,
-                    "y": 701.6979999999994
+                    "y": 674.0979999999992
                 },
                 {
                     "x": 552.8959999999996,
-                    "y": 855.198
+                    "y": 931.198
                 },
                 {
-                    "x": 656.896,
-                    "y": 855.198
+                    "x": 657.896,
+                    "y": 931.198
                 }
             ],
             "radius": 20,
@@ -316,13 +316,13 @@
             "source": {
                 "node": "63c0f27a-716e-804c-6873-cd99b945b63f",
                 "port": "output0",
-                "name": "Room_03"
+                "name": "Room03"
             },
             "target": {
                 "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
                 "port": "input0",
                 "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room_01"
+                "name": "Room01"
             },
             "name": "go_to_room_01"
         }

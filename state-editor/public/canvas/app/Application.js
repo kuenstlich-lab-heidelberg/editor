@@ -19,7 +19,8 @@ Application = Class.extend(
     init : function()
     {
 	    this.view = new View("canvas");
-
+        this.toolbar = new Toolbar("canvas_toolbar", this.view)
+        
         // Databinding: helper attributes for the databinding
 		this.selectedFigure = null;
 
