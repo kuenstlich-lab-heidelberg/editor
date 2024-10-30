@@ -21,6 +21,7 @@ metadata:
     Geheimnisse lüften. Ich folge deiner Führung und sorge dafür, dass alles nach deinem Willen abläuft, 
     während wir gemeinsam die Herausforderungen meistern.
 
+
 states:
   - name: room01
     metadata:

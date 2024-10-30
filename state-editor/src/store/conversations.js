@@ -47,9 +47,8 @@ export default {
   },
   actions: {
     async initialize({ dispatch }) {
-      // Load the default "document.json" file on initialization
       try {
-        await dispatch('downloadConversation', 'document.json');
+        await dispatch('downloadConversation', 'zork.json');
       } catch (error) {
         console.error('Failed to load default conversation:', error);
       }
@@ -103,44 +102,44 @@ export default {
       commit('SET_CONVERSATION_DIAGRAM', data);
     },
 
-    async saveConversation({ commit,state }) {
-        commit('SET_LOADING', true);
-        commit('SET_ERROR', null);
-        try {
-          const formattedJson = JSON.stringify({
-            "config": state.conversationConfig,
-            "diagram": state.conversationDiagram
-          }, null, 4);
+    async saveConversation({ commit, state }) {
+      commit('SET_LOADING', true);
+      commit('SET_ERROR', null);
+      try {
+        const formattedJson = JSON.stringify({
+          "config": state.conversationConfig,
+          "diagram": state.conversationDiagram
+        }, null, 4);
 
-          let blob = new Blob([formattedJson], { type: 'application/json' });
-          let formData = new FormData();
-          formData.append('file', blob, state.conversationName);
+        let blob = new Blob([formattedJson], { type: 'application/json' });
+        let formData = new FormData();
+        formData.append('file', blob, state.conversationName);
 
-          // Send POST request to backend
-          await axios.post(`${API_BASE_URL}/conversations/`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
+        // Send POST request to backend
+        await axios.post(`${API_BASE_URL}/conversations/`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        // Find the starting state shape
+        const startStateShape = state.conversationDiagram.find(
+          (shape) => shape.type === "StateShape" && shape.start === true
+        );
+        const startStateName = startStateShape ? startStateShape.name : null;
+        
+        // Prepare data for the YAML file
+        const stateShapes = state.conversationDiagram
+          .filter((item) => item.type === "StateShape")
+          .map((shape) => ({
+            name: shape.name,
+            metadata: {
+              system_prompt: (shape.userData?.system_prompt ?? "").trim(),
             },
-          });
+          }));
 
-          const startStateShape = state.conversationDiagram.find(
-            (shape) => shape.type === "StateShape" && shape.start === true
-          );
-          const startStateName = startStateShape ? startStateShape.name : null;
-          
-          // save it as YAML as well for the agent software
-          //
-          const stateShapes = state.conversationDiagram
-            .filter((item) => item.type === "StateShape")
-            .map((shape) => ({
-              name: shape.name,
-              metadata: {
-                system_prompt: (shape.userData?.system_prompt ?? "").trim(),
-              },
-            }));
-
-          const trans = state.conversationDiagram
-          .filter((shape) => shape.type === "StateShape" && shape.trigger && shape.trigger.length > 0) // Find StateShapes with triggers
+        const trans = state.conversationDiagram
+          .filter((shape) => shape.type === "StateShape" && shape.trigger && shape.trigger.length > 0)
           .flatMap((shape) => 
             shape.trigger.map((trigger) => ({
               trigger: trigger.name,
@@ -154,42 +153,57 @@ export default {
             }))
           );
 
-          const trans2 = state.conversationDiagram
-          .filter((item) => item.type === "TriggerConnection") // Filter only TriggerConnection shapes
+        const trans2 = state.conversationDiagram
+          .filter((item) => item.type === "TriggerConnection")
           .map((triggerConnection) => ({
             trigger: triggerConnection.name,
-            source: triggerConnection.source.name, // Directly use the source name
-            dest: triggerConnection.target.name,   // Directly use the target name
+            source: triggerConnection.source.name,
+            dest: triggerConnection.target.name,
             metadata: {
               system_prompt: triggerConnection.userData?.system_prompt || "",
               conditions: triggerConnection.userData?.conditions || [],
               actions: triggerConnection.userData?.actions || []
             }
           }));
+
+        // Transform inventory items to the specified object format
+        const formattedInventory = {};
+        state.conversationConfig.inventory.forEach((item) => {
+          let formattedValue;
+          if (item.type === 'boolean') {
+            formattedValue = item.value === 'true' || item.value === true;
+          } else if (item.type === 'integer') {
+            formattedValue = parseInt(item.value, 10);
+          } else {
+            formattedValue = item.value;
+          }
+          formattedInventory[item.key] = formattedValue;
+        });
+
         
-
-          let formatedYaml = yaml.dump({
-            initial: startStateName,
-            metadata: state.conversationConfig,
-            states: stateShapes,
-            transitions: [...trans, ...trans2]
+        let formatedYaml = yaml.dump({
+          initial: startStateName,
+          metadata: {
+            ...state.conversationConfig,
+            inventory: formattedInventory // Use the formatted inventory here
+          },
+          states: stateShapes,
+          transitions: [...trans, ...trans2]
           })
-          blob = new Blob([formatedYaml], { type: 'application/json' });
-          formData = new FormData();
-          formData.append('file', blob, state.conversationName.replace(".json", ".yaml"));
-          await axios.post(`${API_BASE_URL}/conversations/`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
-
-          //commit('SET_CONVERSATION_NAME', fileName);
-        } catch (error) {
-          commit('SET_ERROR', error.response?.data?.detail || 'Error saving document');
-          throw error;
-        } finally {
-          commit('SET_LOADING', false);
-        }
+        blob = new Blob([formatedYaml], { type: 'application/json' });
+        formData = new FormData();
+        formData.append('file', blob, state.conversationName.replace(".json", ".yaml"));
+        await axios.post(`${API_BASE_URL}/conversations/`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      } catch (error) {
+        commit('SET_ERROR', error.response?.data?.detail || 'Error saving document');
+        throw error;
+      } finally {
+        commit('SET_LOADING', false);
+      }
     },
   },
   getters: {
@@ -197,7 +211,6 @@ export default {
     conversationConfig: (state) => state.conversationConfig,
     conversationDiagram: (state) => state.conversationDiagram,
     conversationName: (state) => state.conversationName,
-
     isLoading: (state) => state.loading,
     error: (state) => state.error,
   },

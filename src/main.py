@@ -76,6 +76,16 @@ async def get_yaml_file(file_name: str):
     
     return FileResponse(file_location)
 
+@app.get("/api/v1/sounds/")
+async def list_mp3_files() -> List[str]:
+    """Listet alle YAML-Dateien im definierten Verzeichnis auf"""
+    try:
+        files = [f for f in os.listdir(CONVERSATIONS_FILE_DIR) if f.endswith(".mp3")]
+        return files
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="Verzeichnis nicht gefunden")
+
+
 # Static files für /editor - liefert Dateien aus dem src/static Verzeichnis
 app.mount("/editor", StaticFiles(directory=STATIC_FILES_DIR), name="static")
 

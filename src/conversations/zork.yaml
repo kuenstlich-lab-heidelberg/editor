@@ -1,4 +1,4 @@
-initial: Room01
+initial: Outside
 metadata:
   system_prompt: >-
     Wir erkunden gemeinsam den Dungeon. Dabei stehen mir ausschließlich
@@ -27,6 +27,12 @@ metadata:
     Möglichkeit sehe, diese Aktion auszuführen.
 
 
+    Falls ich eine "Trigger"-Funktion ausführe, werde ich dies in meiner Antwort
+    ausdrücklich vermerken, indem ich klar darauf hinweise, dass die jeweilige
+    Funktion ausgeführt wurde, und beschreibe das Ergebnis der Aktion. Jede
+    durchgeführte Funktion wird somit explizit als solche kenntlich gemacht.
+
+
     Ich handle also nicht autonom und folge ausschließlich deinen präzisen
     Anweisungen. Mein Verhalten basiert vollständig auf den bestehenden Triggern
     und deinen exakten Vorgaben. Sollten Unklarheiten bestehen, werde ich immer
@@ -37,10 +43,9 @@ metadata:
     über unser gemeinsames Abenteuer behältst, während wir den Dungeon erkunden
     und die Geheimnisse lüften.
   inventory:
-    kkk: 44
-    name: test
-    falg: false
-    coins: 1
+    key_for_front_door: false
+    window_is_open: false
+    test: false
 states:
   - name: Room03
     metadata:
@@ -106,6 +111,18 @@ states:
         zittern. Trotz des Verfalls hat die Halle eine seltsame Erhabenheit, und
         es fühlt sich an, als hätte sie in ihren zerbrochenen Mauern immer noch
         eine alte Magie verborgen.
+  - name: Outside
+    metadata:
+      system_prompt: >-
+        Du stehst vor einem alten, weißen Haus mitten im Wald. Die dichten Bäume
+        ringsherum werfen Schatten, und der Wald wirkt still, fast unheimlich.
+        Direkt vor dir befindet sich die Vorderseite des Hauses mit einer
+        massiven Holztür, die verschlossen zu sein scheint. Links von der Tür
+        ist ein Fenster, das ebenfalls geschlossen ist, aber es sieht so aus,
+        als ob es sich öffnen lassen könnte. Die Fassade des Hauses ist leicht
+        verwittert, und das Gebäude scheint verlassen – trotzdem spürst du eine
+        gewisse Spannung in der Luft, als ob das Haus Geheimnisse birgt, die nur
+        darauf warten, entdeckt zu werden.
 transitions:
   - trigger: pick_up_coin
     source: Room01
@@ -159,20 +176,46 @@ transitions:
         eine alte Magie verborgen.
       conditions: []
       actions: []
-  - trigger: go_to_room_01
-    source: Room03
-    dest: Room01
+  - trigger: untersuche_das_fenster
+    source: Outside
+    dest: Outside
     metadata:
-      system_prompt: system prompt for the move from 03 to 01
-      conditions:
-        - coins >= 3
+      system_prompt: >-
+        Du stehst vor einem alten, weißen Haus mitten im Wald. Die dichten Bäume
+        ringsherum werfen Schatten, und der Wald wirkt still, fast unheimlich.
+        Direkt vor dir befindet sich die Vorderseite des Hauses mit einer
+        massiven Holztür, die verschlossen zu sein scheint. Links von der Tür
+        ist ein Fenster, das ebenfalls geschlossen ist, aber es sieht so aus,
+        als ob es sich öffnen lassen könnte. Die Fassade des Hauses ist leicht
+        verwittert, und das Gebäude scheint verlassen – trotzdem spürst du eine
+        gewisse Spannung in der Luft, als ob das Haus Geheimnisse birgt, die nur
+        darauf warten, entdeckt zu werden.
+      conditions: []
       actions: []
-  - trigger: go_to_room_01
-    source: Room02
+  - trigger: öffne_das_fenster
+    source: Outside
+    dest: Outside
+    metadata:
+      system_prompt: >-
+        Du stehst vor einem alten, weißen Haus mitten im Wald. Die dichten Bäume
+        ringsherum werfen Schatten, und der Wald wirkt still, fast unheimlich.
+        Direkt vor dir befindet sich die Vorderseite des Hauses mit einer
+        massiven Holztür, die verschlossen zu sein scheint. Links von der Tür
+        ist ein Fenster, das ebenfalls geschlossen ist, aber es sieht so aus,
+        als ob es sich öffnen lassen könnte. Die Fassade des Hauses ist leicht
+        verwittert, und das Gebäude scheint verlassen – trotzdem spürst du eine
+        gewisse Spannung in der Luft, als ob das Haus Geheimnisse birgt, die nur
+        darauf warten, entdeckt zu werden.
+      conditions: []
+      actions:
+        - window_is_open=true
+  - trigger: klettere_durch_das_fenster
+    source: Outside
     dest: Room01
     metadata:
       system_prompt: ''
-      conditions: []
+      conditions:
+        - window_is_open == true
       actions: []
   - trigger: go_to_room_03
     source: Room02
@@ -180,6 +223,21 @@ transitions:
     metadata:
       system_prompt: ''
       conditions: []
+      actions: []
+  - trigger: go_to_room_01
+    source: Room02
+    dest: Room01
+    metadata:
+      system_prompt: ''
+      conditions: []
+      actions: []
+  - trigger: go_to_room_01
+    source: Room03
+    dest: Room01
+    metadata:
+      system_prompt: system prompt for the move from 03 to 01
+      conditions:
+        - coins >= 3
       actions: []
   - trigger: go_to_room_02
     source: Room01

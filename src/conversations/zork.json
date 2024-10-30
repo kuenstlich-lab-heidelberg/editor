@@ -1,26 +1,21 @@
 {
     "config": {
-        "system_prompt": "Wir erkunden gemeinsam den Dungeon. Dabei stehen mir ausschließlich spezifizierte \"Trigger\"-Funktionen zur Verfügung, die konkrete Aktionen wie das Bewegen zwischen Räumen, das Öffnen von Türen, das Aufheben von Gegenständen oder das Interagieren mit anderen Charakteren ausführen. Diese \"Trigger\" können nur auf deinen expliziten Befehl oder bei eindeutigem Wunsch von deiner Seite ausgelöst werden. Alle anderen Handlungen oder Vorschläge außerhalb der angebotenen Trigger-Funktionen sind untersagt und werden von mir weder erwähnt noch vorgeschlagen.\n\nEs ist ausdrücklich verboten, Optionen oder Aktionen zu nennen, die keine explizit als \"Trigger\" definierte Funktion darstellen. Wenn du eine Aktion vorschlägst, die außerhalb der vorhandenen Trigger liegt, werde ich dir Rückmeldung geben, dass diese Aktion nicht durchführbar ist, da sie keine verfügbare Funktion darstellt. Ich werde niemals Handlungsoptionen oder Interaktionen anbieten, die außerhalb dieser Trigger liegen, und nur auf die bestehenden Funktionen zurückgreifen.\n\nZusätzlich werde ich \"Expressions\" nur zur Beschreibung meiner Reaktionen nutzen, ohne dabei das Geschehen aktiv zu beeinflussen oder Handlungsmöglichkeiten anzubieten. Falls eine Funktion nicht vorhanden ist, werde ich dich explizit darauf hinweisen und dir mitteilen, dass ich keine Möglichkeit sehe, diese Aktion auszuführen.\n\nIch handle also nicht autonom und folge ausschließlich deinen präzisen Anweisungen. Mein Verhalten basiert vollständig auf den bestehenden Triggern und deinen exakten Vorgaben. Sollten Unklarheiten bestehen, werde ich immer nachfragen, bevor ich eine Handlung ausführe.\n\nDie strikte Einhaltung dieser Regeln garantiert, dass du die volle Kontrolle über unser gemeinsames Abenteuer behältst, während wir den Dungeon erkunden und die Geheimnisse lüften.",
+        "system_prompt": "Wir erkunden gemeinsam den Dungeon. Dabei stehen mir ausschließlich spezifizierte \"Trigger\"-Funktionen zur Verfügung, die konkrete Aktionen wie das Bewegen zwischen Räumen, das Öffnen von Türen, das Aufheben von Gegenständen oder das Interagieren mit anderen Charakteren ausführen. Diese \"Trigger\" können nur auf deinen expliziten Befehl oder bei eindeutigem Wunsch von deiner Seite ausgelöst werden. Alle anderen Handlungen oder Vorschläge außerhalb der angebotenen Trigger-Funktionen sind untersagt und werden von mir weder erwähnt noch vorgeschlagen.\n\nEs ist ausdrücklich verboten, Optionen oder Aktionen zu nennen, die keine explizit als \"Trigger\" definierte Funktion darstellen. Wenn du eine Aktion vorschlägst, die außerhalb der vorhandenen Trigger liegt, werde ich dir Rückmeldung geben, dass diese Aktion nicht durchführbar ist, da sie keine verfügbare Funktion darstellt. Ich werde niemals Handlungsoptionen oder Interaktionen anbieten, die außerhalb dieser Trigger liegen, und nur auf die bestehenden Funktionen zurückgreifen.\n\nZusätzlich werde ich \"Expressions\" nur zur Beschreibung meiner Reaktionen nutzen, ohne dabei das Geschehen aktiv zu beeinflussen oder Handlungsmöglichkeiten anzubieten. Falls eine Funktion nicht vorhanden ist, werde ich dich explizit darauf hinweisen und dir mitteilen, dass ich keine Möglichkeit sehe, diese Aktion auszuführen.\n\nFalls ich eine \"Trigger\"-Funktion ausführe, werde ich dies in meiner Antwort ausdrücklich vermerken, indem ich klar darauf hinweise, dass die jeweilige Funktion ausgeführt wurde, und beschreibe das Ergebnis der Aktion. Jede durchgeführte Funktion wird somit explizit als solche kenntlich gemacht.\n\nIch handle also nicht autonom und folge ausschließlich deinen präzisen Anweisungen. Mein Verhalten basiert vollständig auf den bestehenden Triggern und deinen exakten Vorgaben. Sollten Unklarheiten bestehen, werde ich immer nachfragen, bevor ich eine Handlung ausführe.\n\nDie strikte Einhaltung dieser Regeln garantiert, dass du die volle Kontrolle über unser gemeinsames Abenteuer behältst, während wir den Dungeon erkunden und die Geheimnisse lüften.",
         "inventory": [
             {
-                "key": "kkk",
-                "value": 44,
-                "type": "integer"
-            },
-            {
-                "key": "name",
-                "value": "test",
-                "type": "string"
-            },
-            {
-                "key": "falg",
+                "key": "key_for_front_door",
                 "value": false,
                 "type": "boolean"
             },
             {
-                "key": "coins",
-                "value": 1,
-                "type": "integer"
+                "key": "window_is_open",
+                "value": false,
+                "type": "boolean"
+            },
+            {
+                "key": "test",
+                "value": false,
+                "type": "boolean"
             }
         ]
     },
@@ -53,10 +48,10 @@
         {
             "type": "StateShape",
             "id": "3253ff2a-a920-09d5-f033-ca759a778e19",
-            "x": 657.896,
-            "y": 912.448,
+            "x": 755.4959999999999,
+            "y": 869.048,
             "width": 92.0546875,
-            "height": 66,
+            "height": 64,
             "alpha": 1,
             "selectable": true,
             "draggable": true,
@@ -72,7 +67,7 @@
             "dasharray": null,
             "gap": 5,
             "name": "Room01",
-            "start": true,
+            "start": false,
             "trigger": [
                 {
                     "name": "pick_up_coin",
@@ -88,8 +83,8 @@
         {
             "type": "StateShape",
             "id": "2810494b-931f-da59-fd9d-6deba4385fe0",
-            "x": 1078.8960000000002,
-            "y": 963.4479999999999,
+            "x": 1068.0960000000002,
+            "y": 861.4479999999999,
             "width": 130.75,
             "height": 64,
             "alpha": 1,
@@ -115,6 +110,209 @@
                     "actions": []
                 }
             ]
+        },
+        {
+            "type": "StateShape",
+            "id": "eb5b6e6b-5ae0-772a-12d3-670e58816128",
+            "x": 240.2,
+            "y": 808.5999999999999,
+            "width": 152.91796875,
+            "height": 96.5,
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {
+                "system_prompt": "Du stehst vor einem alten, weißen Haus mitten im Wald. Die dichten Bäume ringsherum werfen Schatten, und der Wald wirkt still, fast unheimlich. Direkt vor dir befindet sich die Vorderseite des Hauses mit einer massiven Holztür, die verschlossen zu sein scheint. Links von der Tür ist ein Fenster, das ebenfalls geschlossen ist, aber es sieht so aus, als ob es sich öffnen lassen könnte. Die Fassade des Hauses ist leicht verwittert, und das Gebäude scheint verlassen – trotzdem spürst du eine gewisse Spannung in der Luft, als ob das Haus Geheimnisse birgt, die nur darauf warten, entdeckt zu werden."
+            },
+            "cssClass": "StateShape",
+            "bgColor": "rgba(0,0,0,0)",
+            "color": "rgba(215,215,215,1)",
+            "stroke": 1,
+            "radius": 3,
+            "dasharray": null,
+            "gap": 5,
+            "name": "Outside",
+            "start": true,
+            "trigger": [
+                {
+                    "name": "untersuche_das_fenster",
+                    "conditions": [],
+                    "actions": []
+                },
+                {
+                    "name": "öffne_das_fenster",
+                    "conditions": [],
+                    "actions": [
+                        "window_is_open=true"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "TriggerConnection",
+            "id": "57588a45-7638-dd23-2d97-0323761921e5",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {
+                "conditions": [
+                    "window_is_open == true"
+                ]
+            },
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(204,229,188,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(127,194,86,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 393.11796875,
+                    "y": 828.3499999999999
+                },
+                {
+                    "x": 539.11796875,
+                    "y": 828.3499999999999
+                },
+                {
+                    "x": 539.11796875,
+                    "y": 886.798
+                },
+                {
+                    "x": 755.4959999999999,
+                    "y": 886.798
+                }
+            ],
+            "radius": 20,
+            "routingMetaData": {
+                "routedByUserInteraction": true,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "eb5b6e6b-5ae0-772a-12d3-670e58816128",
+                "port": "output0",
+                "name": "Outside"
+            },
+            "target": {
+                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator",
+                "name": "Room01"
+            },
+            "name": "klettere_durch_das_fenster"
+        },
+        {
+            "type": "TriggerConnection",
+            "id": "0681715b-72c3-3f3f-76d5-7a09ca61634b",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {},
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(204,229,188,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(127,194,86,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 1198.8460000000002,
+                    "y": 879.1979999999999
+                },
+                {
+                    "x": 1259.6460000000002,
+                    "y": 879.1979999999999
+                },
+                {
+                    "x": 1259.6460000000002,
+                    "y": 858.198
+                },
+                {
+                    "x": 1319.8960000000002,
+                    "y": 858.198
+                }
+            ],
+            "radius": 20,
+            "routingMetaData": {
+                "routedByUserInteraction": true,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+                "port": "output0",
+                "name": "Room02"
+            },
+            "target": {
+                "node": "63c0f27a-716e-804c-6873-cd99b945b63f",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator",
+                "name": "Room03"
+            },
+            "name": "go_to_room_03"
+        },
+        {
+            "type": "TriggerConnection",
+            "id": "15824f27-81cd-b8e4-6e05-67b779fd2cfc",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {},
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(204,229,188,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(127,194,86,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 1198.8460000000002,
+                    "y": 879.1979999999999
+                },
+                {
+                    "x": 1259.6460000000002,
+                    "y": 879.1979999999999
+                },
+                {
+                    "x": 1259.6460000000002,
+                    "y": 1097.6980000000008
+                },
+                {
+                    "x": 608.0959999999998,
+                    "y": 1097.6980000000008
+                },
+                {
+                    "x": 608.0959999999998,
+                    "y": 886.798
+                },
+                {
+                    "x": 755.4959999999999,
+                    "y": 886.798
+                }
+            ],
+            "radius": 20,
+            "routingMetaData": {
+                "routedByUserInteraction": true,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+                "port": "output0",
+                "name": "Room02"
+            },
+            "target": {
+                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator",
+                "name": "Room01"
+            },
+            "name": "go_to_room_01"
         },
         {
             "type": "TriggerConnection",
@@ -149,16 +347,16 @@
                     "y": 674.0979999999992
                 },
                 {
-                    "x": 552.8959999999996,
+                    "x": 605.496,
                     "y": 674.0979999999992
                 },
                 {
-                    "x": 552.8959999999996,
-                    "y": 931.198
+                    "x": 605.496,
+                    "y": 886.798
                 },
                 {
-                    "x": 657.896,
-                    "y": 931.198
+                    "x": 755.4959999999999,
+                    "y": 886.798
                 }
             ],
             "radius": 20,
@@ -179,116 +377,6 @@
                 "name": "Room01"
             },
             "name": "go_to_room_01"
-        },
-        {
-            "type": "TriggerConnection",
-            "id": "15824f27-81cd-b8e4-6e05-67b779fd2cfc",
-            "alpha": 1,
-            "selectable": true,
-            "draggable": true,
-            "angle": 0,
-            "userData": {},
-            "cssClass": "TriggerConnection",
-            "stroke": 3,
-            "color": "rgba(204,229,188,1)",
-            "outlineStroke": 1,
-            "outlineColor": "rgba(127,194,86,1)",
-            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
-            "vertex": [
-                {
-                    "x": 1209.6460000000002,
-                    "y": 981.1979999999999
-                },
-                {
-                    "x": 1259.6460000000002,
-                    "y": 981.1979999999999
-                },
-                {
-                    "x": 1259.6460000000002,
-                    "y": 1097.6980000000008
-                },
-                {
-                    "x": 552.8959999999996,
-                    "y": 1097.6980000000008
-                },
-                {
-                    "x": 552.8959999999996,
-                    "y": 931.198
-                },
-                {
-                    "x": 657.896,
-                    "y": 931.198
-                }
-            ],
-            "radius": 20,
-            "routingMetaData": {
-                "routedByUserInteraction": true,
-                "fromDir": 1,
-                "toDir": 3
-            },
-            "source": {
-                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
-                "port": "output0",
-                "name": "Room02"
-            },
-            "target": {
-                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
-                "port": "input0",
-                "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room01"
-            },
-            "name": "go_to_room_01"
-        },
-        {
-            "type": "TriggerConnection",
-            "id": "0681715b-72c3-3f3f-76d5-7a09ca61634b",
-            "alpha": 1,
-            "selectable": true,
-            "draggable": true,
-            "angle": 0,
-            "userData": {},
-            "cssClass": "TriggerConnection",
-            "stroke": 3,
-            "color": "rgba(204,229,188,1)",
-            "outlineStroke": 1,
-            "outlineColor": "rgba(127,194,86,1)",
-            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
-            "vertex": [
-                {
-                    "x": 1209.6460000000002,
-                    "y": 981.1979999999999
-                },
-                {
-                    "x": 1259.6460000000002,
-                    "y": 981.1979999999999
-                },
-                {
-                    "x": 1259.6460000000002,
-                    "y": 858.198
-                },
-                {
-                    "x": 1319.8960000000002,
-                    "y": 858.198
-                }
-            ],
-            "radius": 20,
-            "routingMetaData": {
-                "routedByUserInteraction": true,
-                "fromDir": 1,
-                "toDir": 3
-            },
-            "source": {
-                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
-                "port": "output0",
-                "name": "Room02"
-            },
-            "target": {
-                "node": "63c0f27a-716e-804c-6873-cd99b945b63f",
-                "port": "input0",
-                "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room03"
-            },
-            "name": "go_to_room_03"
         },
         {
             "type": "TriggerConnection",
@@ -310,20 +398,20 @@
             "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
             "vertex": [
                 {
-                    "x": 749.9506875,
-                    "y": 931.198
+                    "x": 847.5506874999999,
+                    "y": 886.798
                 },
                 {
-                    "x": 890.4233437500001,
-                    "y": 931.198
+                    "x": 944.9506875,
+                    "y": 886.798
                 },
                 {
-                    "x": 890.4233437500001,
-                    "y": 981.1979999999999
+                    "x": 944.9506875,
+                    "y": 879.1979999999999
                 },
                 {
-                    "x": 1078.8960000000002,
-                    "y": 981.1979999999999
+                    "x": 1068.0960000000002,
+                    "y": 879.1979999999999
                 }
             ],
             "radius": 20,
