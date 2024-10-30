@@ -86,6 +86,17 @@ async def list_mp3_files() -> List[str]:
         raise HTTPException(status_code=500, detail="Verzeichnis nicht gefunden")
 
 
+@app.get("/api/v1/sounds/{file_name}")
+async def get_mp3_file(file_name: str):
+    """Lädt eine MP3-Datei anhand ihres Namens"""
+    file_location = os.path.join(CONVERSATIONS_FILE_DIR, file_name)
+    if not os.path.exists(file_location):
+        raise HTTPException(status_code=404, detail="Datei nicht gefunden")
+    
+    # Return the file as a response with the appropriate MIME type for MP3
+    return FileResponse(file_location, media_type="audio/mpeg", filename=file_name)
+
+
 # Static files für /editor - liefert Dateien aus dem src/static Verzeichnis
 app.mount("/editor", StaticFiles(directory=STATIC_FILES_DIR), name="static")
 

@@ -8,6 +8,22 @@
             @input="onDataChange"
         />
 
+        <!-- Ambient Sound ComboBox and Play Button -->
+        <div class="sound-selection">
+          <v-select
+            v-model="jsonData.userData.ambient_sound"
+            :items="soundFiles"
+            label="Ambient Sound"
+            outlined
+          ></v-select>
+          
+          <v-btn icon size="small" @click="playSelectedSound">
+            <v-icon size="small">mdi-play</v-icon>
+          </v-btn>
+              
+        </div>
+    
+        
         <label v-if="jsonData.userData"  for="systemPrompt">System Prompt:</label>
         <textarea
             v-if="jsonData.userData" 
@@ -19,9 +35,11 @@
         ></textarea>
 
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
+  import { mapActions, mapGetters } from 'vuex';
+
   export default {
     name: 'PropertyView',
     props: {
@@ -36,18 +54,58 @@
           name: '',
           userData: {
             system_prompt: '',
+            ambient_sound: '',
+          },
         },
-        },
+        currentAudio: null,
       };
     },
+    computed: {
+      ...mapGetters('sounds', ['files', 'currentSoundUrl']), // Get sound files and current sound URL from Vuex store
+      soundFiles() {
+        return this.files;
+      },
+    },
+    watch: {
+      "jsonData.userData.ambient_sound"(newValue, oldValue) {
+        this.onDataChange();
+      },
+    },
     methods: {
+      ...mapActions('sounds', ['downloadSound']), // Action to download and play sound
+
       onDataChange() { 
         if (this.draw2dFrame ) {
             var data = JSON.parse(JSON.stringify( this.jsonData ));
             this.draw2dFrame.postMessage({ type: 'setShapeData', data: data },'*');
         }
       },
+
+      async playSelectedSound() {
+        if (!this.jsonData.userData.ambient_sound) return;
+
+        // Stop any currently playing audio
+        if (this.currentAudio) {
+          this.currentAudio.pause();
+          this.currentAudio.currentTime = 0; // Reset playback to the start
+          this.currentAudio = null;
+        }
+
+        // Download and play the selected sound using Vuex action
+        await this.downloadSound(this.jsonData.userData.ambient_sound);
+
+        // Play sound from the current URL after download
+        if (this.currentSoundUrl) {
+          this.currentAudio = new Audio(this.currentSoundUrl); // Store audio instance
+          this.currentAudio.play();
+          this.currentAudio.onended = () => {
+            URL.revokeObjectURL(this.currentSoundUrl);
+            this.currentAudio = null; // Clear current audio when done
+          };
+        }
+      },
     },
+
     mounted() {
         // Event listener for messages from the iframe
         window.addEventListener('message', (event) => {
@@ -71,6 +129,7 @@
     box-sizing: border-box; 
     display: flex;
     flex-direction: column;
+    gap: 10px;
   }
   
 
@@ -98,6 +157,16 @@
   resize: vertical; /* Allows vertical resizing only */
   background-color: #f9f9f9;
   flex: 1;
+}
+
+.sound-selection {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.v-combobox {
+  flex: 1; 
 }
   </style>
   

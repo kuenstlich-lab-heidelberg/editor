@@ -1,6 +1,6 @@
 {
     "config": {
-        "system_prompt": "Wir erkunden gemeinsam den Dungeon. Dabei stehen mir ausschließlich spezifizierte \"Trigger\"-Funktionen zur Verfügung, die konkrete Aktionen wie das Bewegen zwischen Räumen, das Öffnen von Türen, das Aufheben von Gegenständen oder das Interagieren mit anderen Charakteren ausführen. Diese \"Trigger\" können nur auf deinen expliziten Befehl oder bei eindeutigem Wunsch von deiner Seite ausgelöst werden. Alle anderen Handlungen oder Vorschläge außerhalb der angebotenen Trigger-Funktionen sind untersagt und werden von mir weder erwähnt noch vorgeschlagen.\n\nEs ist ausdrücklich verboten, Optionen oder Aktionen zu nennen, die keine explizit als \"Trigger\" definierte Funktion darstellen. Wenn du eine Aktion vorschlägst, die außerhalb der vorhandenen Trigger liegt, werde ich dir Rückmeldung geben, dass diese Aktion nicht durchführbar ist, da sie keine verfügbare Funktion darstellt. Ich werde niemals Handlungsoptionen oder Interaktionen anbieten, die außerhalb dieser Trigger liegen, und nur auf die bestehenden Funktionen zurückgreifen.\n\nZusätzlich werde ich \"Expressions\" nur zur Beschreibung meiner Reaktionen nutzen, ohne dabei das Geschehen aktiv zu beeinflussen oder Handlungsmöglichkeiten anzubieten. Falls eine Funktion nicht vorhanden ist, werde ich dich explizit darauf hinweisen und dir mitteilen, dass ich keine Möglichkeit sehe, diese Aktion auszuführen.\n\nFalls ich eine \"Trigger\"-Funktion ausführe, werde ich dies in meiner Antwort ausdrücklich vermerken, indem ich klar darauf hinweise, dass die jeweilige Funktion ausgeführt wurde, und beschreibe das Ergebnis der Aktion. Jede durchgeführte Funktion wird somit explizit als solche kenntlich gemacht.\n\nIch handle also nicht autonom und folge ausschließlich deinen präzisen Anweisungen. Mein Verhalten basiert vollständig auf den bestehenden Triggern und deinen exakten Vorgaben. Sollten Unklarheiten bestehen, werde ich immer nachfragen, bevor ich eine Handlung ausführe.\n\nDie strikte Einhaltung dieser Regeln garantiert, dass du die volle Kontrolle über unser gemeinsames Abenteuer behältst, während wir den Dungeon erkunden und die Geheimnisse lüften.",
+        "system_prompt": "Wir erkunden gemeinsam den Dungeon. Dabei stehen mir ausschließlich spezifizierte Aktionen zur Verfügung, die konkrete Aktionen wie das Bewegen zwischen Räumen, das Öffnen von Türen, das Aufheben von Gegenständen oder das Interagieren mit anderen Charakteren ausführen. Diese \"Aktionen\" können nur auf deinen expliziten Befehl oder bei eindeutigem Wunsch von deiner Seite ausgelöst werden. Alle anderen Handlungen oder Vorschläge außerhalb der angebotenen Aktionen sind untersagt und werden von mir weder erwähnt noch vorgeschlagen.\n\nEs ist ausdrücklich verboten, Optionen oder Aktionen zu nennen, die keine explizit als \"Aktionen\" definierte Funktion darstellen. Wenn du eine Aktion vorschlägst, die außerhalb der vorhandenen Aktionen liegt, werde ich dir Rückmeldung geben, dass diese Aktion nicht durchführbar ist, da sie keine erlaubt Aktion in diesem Raum ist. Ich werde niemals Handlungsoptionen oder Interaktionen anbieten, die außerhalb dieser Aktionen liegen, und nur auf die bestehenden Aktionen zurückgreifen. \n\nZusätzlich werde ich \"Expressions\" nur zur Beschreibung meiner Reaktionen nutzen, ohne dabei das Geschehen aktiv zu beeinflussen oder Handlungsmöglichkeiten anzubieten. Falls eine Funktion nicht vorhanden ist, werde ich dich explizit darauf hinweisen und dir mitteilen, dass ich keine Möglichkeit sehe, diese Aktion auszuführen.\n\nFalls ich eine \"Trigger\"-Funktion ausführe, werde ich dies in meiner Antwort ausdrücklich vermerken, indem ich klar darauf hinweise, dass die jeweilige Funktion ausgeführt wurde, und beschreibe das Ergebnis der Aktion. Jede durchgeführte Funktion wird somit explizit als solche kenntlich gemacht.\n\nIch handle also nicht autonom und folge ausschließlich deinen präzisen Anweisungen. Mein Verhalten basiert vollständig auf den bestehenden Triggern und deinen exakten Vorgaben. Sollten Unklarheiten bestehen, werde ich immer nachfragen, bevor ich eine Handlung ausführe.\n\nDie strikte Einhaltung dieser Regeln garantiert, dass du die volle Kontrolle über unser gemeinsames Abenteuer behältst, während wir den Dungeon erkunden und die Geheimnisse lüften.\n\nBitte halte dich bei deinen Aussagen möglichst kurz um den Spielverlauf nicht zu sehr zu bremsen. Aber bitte störe mit den kurzen Antwortne nicht die Atmosphäre des spieles. Schöne blumige Sprache verwenden ist gut.",
         "inventory": [
             {
                 "key": "key_for_front_door",
@@ -13,7 +13,12 @@
                 "type": "boolean"
             },
             {
-                "key": "test",
+                "key": "coins",
+                "value": 0,
+                "type": "integer"
+            },
+            {
+                "key": "key_for_room_2",
                 "value": false,
                 "type": "boolean"
             }
@@ -50,14 +55,15 @@
             "id": "3253ff2a-a920-09d5-f033-ca759a778e19",
             "x": 755.4959999999999,
             "y": 869.048,
-            "width": 92.0546875,
-            "height": 64,
+            "width": 114.71875,
+            "height": 92.5,
             "alpha": 1,
             "selectable": true,
             "draggable": true,
             "angle": 0,
             "userData": {
-                "system_prompt": "You are now in the \"room 1\" of the building. This is important if the user asked for.\nDu befindest dich in einer alten, verstaubten Bibliothek. Die hohen Wände sind von oben bis unten mit endlosen Reihen verstaubter Bücherregale bedeckt, die bis zur Decke reichen. Das schwache Licht von einer zerbrochenen Lampe flackert an der Decke und wirft tanzende \nSchatten auf den Boden. Die Luft riecht nach alten, vergessenen Geschichten und Tinte. Im hinteren Teil des Raumes steht ein schwerer, hölzerner Schreibtisch, auf dem ein dickes, in Leder gebundenes Buch liegt, dessen Seiten immer noch sanft rascheln, als ob sie von einer \nunsichtbaren Hand umgeblättert würden. Neben dem Schreibtisch befindet sich ein Kamin, in dem schwach glühende Kohlen die einzige Wärmequelle des Raumes darstellen. Es gibt das Gefühl, dass dieser Raum einst viele Geheimnisse bewahrt hat und darauf wartet, dass jemand sie entdeckt."
+                "system_prompt": "You are now in the \"room 1\" of the building. This is important if the user asked for.\nDu befindest dich in einer alten, verstaubten Bibliothek. Die hohen Wände sind von oben bis unten mit endlosen Reihen verstaubter Bücherregale bedeckt, die bis zur Decke reichen. Das schwache Licht von einer zerbrochenen Lampe flackert an der Decke und wirft tanzende \nSchatten auf den Boden. Die Luft riecht nach alten, vergessenen Geschichten und Tinte. Im hinteren Teil des Raumes steht ein schwerer, hölzerner Schreibtisch, auf dem ein dickes, in Leder gebundenes Buch liegt, dessen Seiten immer noch sanft rascheln, als ob sie von einer \nunsichtbaren Hand umgeblättert würden. Neben dem Schreibtisch befindet sich ein Kamin, in dem schwach glühende Kohlen die einzige Wärmequelle des Raumes darstellen. Es gibt das Gefühl, dass dieser Raum einst viele Geheimnisse bewahrt hat und darauf wartet, dass jemand sie entdeckt.",
+                "ambient_sound": "bg-campfire.mp3"
             },
             "cssClass": "StateShape",
             "bgColor": "rgba(0,0,0,0)",
@@ -70,13 +76,18 @@
             "start": false,
             "trigger": [
                 {
-                    "name": "pick_up_coin",
+                    "name": "nehme_schlüssel",
                     "conditions": [
                         ""
                     ],
                     "actions": [
-                        "coins = coins +1"
+                        "key = true"
                     ]
+                },
+                {
+                    "name": "suche_schlüssel",
+                    "conditions": [],
+                    "actions": []
                 }
             ]
         },
@@ -117,13 +128,14 @@
             "x": 240.2,
             "y": 808.5999999999999,
             "width": 152.91796875,
-            "height": 96.5,
+            "height": 125,
             "alpha": 1,
             "selectable": true,
             "draggable": true,
             "angle": 0,
             "userData": {
-                "system_prompt": "Du stehst vor einem alten, weißen Haus mitten im Wald. Die dichten Bäume ringsherum werfen Schatten, und der Wald wirkt still, fast unheimlich. Direkt vor dir befindet sich die Vorderseite des Hauses mit einer massiven Holztür, die verschlossen zu sein scheint. Links von der Tür ist ein Fenster, das ebenfalls geschlossen ist, aber es sieht so aus, als ob es sich öffnen lassen könnte. Die Fassade des Hauses ist leicht verwittert, und das Gebäude scheint verlassen – trotzdem spürst du eine gewisse Spannung in der Luft, als ob das Haus Geheimnisse birgt, die nur darauf warten, entdeckt zu werden."
+                "system_prompt": "Du stehst vor einem alten, weißen Haus mitten im Wald. Die dichten Bäume ringsherum werfen Schatten, und der Wald wirkt still, fast unheimlich. Direkt vor dir befindet sich die Vorderseite des Hauses mit einer massiven Holztür, die verschlossen zu sein scheint. Links von der Tür ist ein Fenster, das ebenfalls geschlossen ist, aber es sieht so aus, als ob es sich öffnen lassen könnte. Die Fassade des Hauses ist leicht verwittert, und das Gebäude scheint verlassen – trotzdem spürst du eine gewisse Spannung in der Luft, als ob das Haus Geheimnisse birgt, die nur darauf warten, entdeckt zu werden.",
+                "ambient_sound": "bg-birds.mp3"
             },
             "cssClass": "StateShape",
             "bgColor": "rgba(0,0,0,0)",
@@ -144,65 +156,15 @@
                     "name": "öffne_das_fenster",
                     "conditions": [],
                     "actions": [
-                        "window_is_open=true"
+                        "window_is_open = true"
                     ]
+                },
+                {
+                    "name": "untersuche_das_haus",
+                    "conditions": [],
+                    "actions": []
                 }
             ]
-        },
-        {
-            "type": "TriggerConnection",
-            "id": "57588a45-7638-dd23-2d97-0323761921e5",
-            "alpha": 1,
-            "selectable": true,
-            "draggable": true,
-            "angle": 0,
-            "userData": {
-                "conditions": [
-                    "window_is_open == true"
-                ]
-            },
-            "cssClass": "TriggerConnection",
-            "stroke": 3,
-            "color": "rgba(204,229,188,1)",
-            "outlineStroke": 1,
-            "outlineColor": "rgba(127,194,86,1)",
-            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
-            "vertex": [
-                {
-                    "x": 393.11796875,
-                    "y": 828.3499999999999
-                },
-                {
-                    "x": 539.11796875,
-                    "y": 828.3499999999999
-                },
-                {
-                    "x": 539.11796875,
-                    "y": 886.798
-                },
-                {
-                    "x": 755.4959999999999,
-                    "y": 886.798
-                }
-            ],
-            "radius": 20,
-            "routingMetaData": {
-                "routedByUserInteraction": true,
-                "fromDir": 1,
-                "toDir": 3
-            },
-            "source": {
-                "node": "eb5b6e6b-5ae0-772a-12d3-670e58816128",
-                "port": "output0",
-                "name": "Outside"
-            },
-            "target": {
-                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
-                "port": "input0",
-                "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room01"
-            },
-            "name": "klettere_durch_das_fenster"
         },
         {
             "type": "TriggerConnection",
@@ -316,6 +278,118 @@
         },
         {
             "type": "TriggerConnection",
+            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {
+                "conditions": [
+                    "key_for_room_2 == true"
+                ],
+                "system_prompt": "Du bist von dem ersten raum in den nächstne Raum gegangen"
+            },
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(204,229,188,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(127,194,86,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 870.2147499999999,
+                    "y": 886.798
+                },
+                {
+                    "x": 944.9506875,
+                    "y": 886.798
+                },
+                {
+                    "x": 944.9506875,
+                    "y": 879.1979999999999
+                },
+                {
+                    "x": 1068.0960000000002,
+                    "y": 879.1979999999999
+                }
+            ],
+            "radius": 20,
+            "routingMetaData": {
+                "routedByUserInteraction": true,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+                "port": "output0",
+                "name": "Room01"
+            },
+            "target": {
+                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator",
+                "name": "Room02"
+            },
+            "name": "go_to_room_02"
+        },
+        {
+            "type": "TriggerConnection",
+            "id": "57588a45-7638-dd23-2d97-0323761921e5",
+            "alpha": 1,
+            "selectable": true,
+            "draggable": true,
+            "angle": 0,
+            "userData": {
+                "conditions": [
+                    "window_is_open == true"
+                ],
+                "system_prompt": "Du bist durch das Fenster geklettert und befindest Dich nun in dem ersten raum"
+            },
+            "cssClass": "TriggerConnection",
+            "stroke": 3,
+            "color": "rgba(204,229,188,1)",
+            "outlineStroke": 1,
+            "outlineColor": "rgba(127,194,86,1)",
+            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
+            "vertex": [
+                {
+                    "x": 393.11796875,
+                    "y": 828.3499999999999
+                },
+                {
+                    "x": 539.11796875,
+                    "y": 828.3499999999999
+                },
+                {
+                    "x": 539.11796875,
+                    "y": 886.798
+                },
+                {
+                    "x": 755.4959999999999,
+                    "y": 886.798
+                }
+            ],
+            "radius": 20,
+            "routingMetaData": {
+                "routedByUserInteraction": true,
+                "fromDir": 1,
+                "toDir": 3
+            },
+            "source": {
+                "node": "eb5b6e6b-5ae0-772a-12d3-670e58816128",
+                "port": "output0",
+                "name": "Outside"
+            },
+            "target": {
+                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
+                "port": "input0",
+                "decoration": "draw2d.decoration.connection.ArrowDecorator",
+                "name": "Room01"
+            },
+            "name": "klettere_durch_das_fenster"
+        },
+        {
+            "type": "TriggerConnection",
             "id": "989418ec-97b6-5deb-cc9e-6efb728e7abe",
             "alpha": 1,
             "selectable": true,
@@ -377,61 +451,6 @@
                 "name": "Room01"
             },
             "name": "go_to_room_01"
-        },
-        {
-            "type": "TriggerConnection",
-            "id": "8f02374a-2e87-6b7d-1456-60c3e18e1e4a",
-            "alpha": 1,
-            "selectable": true,
-            "draggable": true,
-            "angle": 0,
-            "userData": {
-                "conditions": [
-                    "coins>1"
-                ]
-            },
-            "cssClass": "TriggerConnection",
-            "stroke": 3,
-            "color": "rgba(204,229,188,1)",
-            "outlineStroke": 1,
-            "outlineColor": "rgba(127,194,86,1)",
-            "policy": "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
-            "vertex": [
-                {
-                    "x": 847.5506874999999,
-                    "y": 886.798
-                },
-                {
-                    "x": 944.9506875,
-                    "y": 886.798
-                },
-                {
-                    "x": 944.9506875,
-                    "y": 879.1979999999999
-                },
-                {
-                    "x": 1068.0960000000002,
-                    "y": 879.1979999999999
-                }
-            ],
-            "radius": 20,
-            "routingMetaData": {
-                "routedByUserInteraction": true,
-                "fromDir": 1,
-                "toDir": 3
-            },
-            "source": {
-                "node": "3253ff2a-a920-09d5-f033-ca759a778e19",
-                "port": "output0",
-                "name": "Room01"
-            },
-            "target": {
-                "node": "2810494b-931f-da59-fd9d-6deba4385fe0",
-                "port": "input0",
-                "decoration": "draw2d.decoration.connection.ArrowDecorator",
-                "name": "Room02"
-            },
-            "name": "go_to_room_02"
         }
     ]
 }

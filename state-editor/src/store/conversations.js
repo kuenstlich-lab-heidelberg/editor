@@ -135,6 +135,7 @@ export default {
             name: shape.name,
             metadata: {
               system_prompt: (shape.userData?.system_prompt ?? "").trim(),
+              ambient_sound: shape.userData?.ambient_sound?.trim(),
             },
           }));
 
@@ -166,6 +167,17 @@ export default {
             }
           }));
 
+        const start_trans = {
+          trigger: "start",
+          source: startStateName,
+          dest: startStateName,
+          metadata: {
+            system_prompt: "",
+            conditions: [],
+            actions: []
+          }
+        }
+
         // Transform inventory items to the specified object format
         const formattedInventory = {};
         state.conversationConfig.inventory.forEach((item) => {
@@ -188,7 +200,7 @@ export default {
             inventory: formattedInventory // Use the formatted inventory here
           },
           states: stateShapes,
-          transitions: [...trans, ...trans2]
+          transitions: [start_trans, ...trans, ...trans2]
           })
         blob = new Blob([formatedYaml], { type: 'application/json' });
         formData = new FormData();

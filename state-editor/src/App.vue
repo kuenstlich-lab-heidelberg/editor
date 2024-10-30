@@ -50,12 +50,16 @@
       // Call the namespaced initialize action from the conversations module
       setTimeout(() => {
         this.initializeConversation();
+        this.initializeSounds()
       }, 500);
     },
   
     methods: {
       ...mapActions('conversations', {
         initializeConversation: 'initialize'
+      }),
+      ...mapActions('sounds', {
+        initializeSounds: 'initialize'
       }),
       handleRequestDocument() {
         // Call the requestDraw2dDocument method in the Iframe component
