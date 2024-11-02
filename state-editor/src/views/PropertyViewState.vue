@@ -1,6 +1,6 @@
 <template>
-    <div class="property-view"  v-if="jsonData.type === 'StateShape'">
-        <h3>State</h3>
+    <div class="property-view" v-if="jsonData.type === 'StateShape'">
+        <h3>Sceene</h3>
         <input
             id="stateName"
             type="text"
@@ -13,6 +13,7 @@
           <v-select
             v-model="jsonData.userData.ambient_sound"
             :items="soundFiles"
+            density="compact"
             label="Ambient Sound"
             outlined
           ></v-select>
@@ -20,11 +21,10 @@
           <v-btn icon size="small" @click="playSelectedSound">
             <v-icon size="small">mdi-play</v-icon>
           </v-btn>
-              
         </div>
     
         
-        <label v-if="jsonData.userData"  for="systemPrompt">System Prompt:</label>
+        <label v-if="jsonData.userData"  for="systemPrompt">Sceen Description</label>
         <textarea
             v-if="jsonData.userData" 
             id="systemPrompt"
@@ -38,7 +38,8 @@
 </template>
   
 <script>
-  import { mapActions, mapGetters } from 'vuex';
+  import SoundManager from '@/utils/SoundManager'
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'PropertyView',
@@ -56,25 +57,25 @@
             system_prompt: '',
             ambient_sound: '',
           },
-        },
-        currentAudio: null,
+        }
       };
     },
     computed: {
-      ...mapGetters('sounds', ['files', 'currentSoundUrl']), // Get sound files and current sound URL from Vuex store
+      ...mapGetters('sounds', ['files']),
       soundFiles() {
         return this.files;
       },
     },
     watch: {
-      "jsonData.userData.ambient_sound"(newValue, oldValue) {
+      "jsonData.userData.ambient_sound"() {
         this.onDataChange();
       },
     },
     methods: {
-      ...mapActions('sounds', ['downloadSound']), // Action to download and play sound
 
       onDataChange() { 
+        console.log(this.jsonData)
+        this.jsonData.name = this.jsonData?.name?.replace(/[^a-zA-Z0-9]/g, '');
         if (this.draw2dFrame ) {
             var data = JSON.parse(JSON.stringify( this.jsonData ));
             this.draw2dFrame.postMessage({ type: 'setShapeData', data: data },'*');
@@ -82,26 +83,8 @@
       },
 
       async playSelectedSound() {
-        if (!this.jsonData.userData.ambient_sound) return;
-
-        // Stop any currently playing audio
-        if (this.currentAudio) {
-          this.currentAudio.pause();
-          this.currentAudio.currentTime = 0; // Reset playback to the start
-          this.currentAudio = null;
-        }
-
-        // Download and play the selected sound using Vuex action
-        await this.downloadSound(this.jsonData.userData.ambient_sound);
-
-        // Play sound from the current URL after download
-        if (this.currentSoundUrl) {
-          this.currentAudio = new Audio(this.currentSoundUrl); // Store audio instance
-          this.currentAudio.play();
-          this.currentAudio.onended = () => {
-            URL.revokeObjectURL(this.currentSoundUrl);
-            this.currentAudio = null; // Clear current audio when done
-          };
+        if (this.jsonData.userData.ambient_sound) {
+          SoundManager.playSound(this.jsonData.userData.ambient_sound);
         }
       },
     },
@@ -111,8 +94,11 @@
         window.addEventListener('message', (event) => {
             if (event.origin !== window.location.origin) return;
             const message = event.data;
-            if (message.type === 'onStateSelect') {
+            if (message.event === 'onSelect' && message.type == "StateShape") {
                 this.jsonData = message.data
+            }
+            else if (message.event === 'onUnselect') {
+                this.jsonData = {}
             }
         });
     }

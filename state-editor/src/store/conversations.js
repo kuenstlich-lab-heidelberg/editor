@@ -147,7 +147,9 @@ export default {
               source: shape.name,
               dest: shape.name,
               metadata: {
-                system_prompt: shape.userData?.system_prompt || "",
+                system_prompt: trigger.system_prompt || "",
+                description: trigger.description || "",
+                sound_effect: trigger.sound_effect || "",
                 conditions: trigger.conditions || [],
                 actions: trigger.actions || []
               }
@@ -162,21 +164,13 @@ export default {
             dest: triggerConnection.target.name,
             metadata: {
               system_prompt: triggerConnection.userData?.system_prompt || "",
+              description: triggerConnection.userData?.description || "",
+              sound_effect: triggerConnection.userData?.sound_effect || "",
               conditions: triggerConnection.userData?.conditions || [],
               actions: triggerConnection.userData?.actions || []
             }
           }));
 
-        const start_trans = {
-          trigger: "start",
-          source: startStateName,
-          dest: startStateName,
-          metadata: {
-            system_prompt: "",
-            conditions: [],
-            actions: []
-          }
-        }
 
         // Transform inventory items to the specified object format
         const formattedInventory = {};
@@ -200,7 +194,7 @@ export default {
             inventory: formattedInventory // Use the formatted inventory here
           },
           states: stateShapes,
-          transitions: [start_trans, ...trans, ...trans2]
+          transitions: [...trans, ...trans2]
           })
         blob = new Blob([formatedYaml], { type: 'application/json' });
         formData = new FormData();

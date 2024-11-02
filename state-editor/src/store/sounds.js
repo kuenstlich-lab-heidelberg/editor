@@ -31,16 +31,17 @@ export default {
     },
 
     async fetchSounds({ commit }) {
-      commit('SET_LOADING', true);
-      commit('SET_ERROR', null);
+      commit('SET_LOADING', true)
+      commit('SET_ERROR', null)
       try {
-        const response = await axios.get(`${API_BASE_URL}/sounds/`);
-        commit('SET_FILES', response.data);
-        console.log(response.data)
+        const response = await axios.get(`${API_BASE_URL}/sounds/`)
+        const sortedFiles = response.data.sort((a, b) => a.localeCompare(b));
+        
+        commit('SET_FILES', sortedFiles);
       } catch (error) {
-        commit('SET_ERROR', error.response?.data?.detail || 'Error fetching sounds');
+        commit('SET_ERROR', error.response?.data?.detail || 'Error fetching sounds')
       } finally {
-        commit('SET_LOADING', false);
+        commit('SET_LOADING', false)
       }
     },
 

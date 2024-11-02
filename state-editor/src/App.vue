@@ -32,7 +32,6 @@
   import AppToolbar from './components/AppToolbar.vue'; 
   import { mapActions } from 'vuex';
 
-
   export default {
     components: {
       AppToolbar
@@ -88,6 +87,7 @@
 
 
   .content-area {
+    overflow: hidden;
     flex: 1;
     display: flex;
     flex-direction: column;

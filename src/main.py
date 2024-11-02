@@ -80,7 +80,7 @@ async def get_yaml_file(file_name: str):
 async def list_mp3_files() -> List[str]:
     """Listet alle YAML-Dateien im definierten Verzeichnis auf"""
     try:
-        files = [f for f in os.listdir(CONVERSATIONS_FILE_DIR) if f.endswith(".mp3")]
+        files = [f for f in os.listdir(CONVERSATIONS_FILE_DIR) if f.endswith((".mp3", ".wav"))]
         return files
     except FileNotFoundError:
         raise HTTPException(status_code=500, detail="Verzeichnis nicht gefunden")

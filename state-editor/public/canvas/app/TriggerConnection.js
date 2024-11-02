@@ -6,7 +6,9 @@
  * @author Andreas Herz
  * @extend draw2d.Connection
  */
-var routerToUse =new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
+var routerToUse = new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
+    //routerToUse = new draw2d.layout.connection.FanConnectionRouter()
+    //routerToUse = new draw2d.layout.connection.MazeConnectionRouter()
 
 var TriggerConnection= draw2d.Connection.extend({
     NAME: "TriggerConnection",
@@ -34,8 +36,10 @@ var TriggerConnection= draw2d.Connection.extend({
       //
       this.label = new draw2d.shape.basic.Label({
           text:"trigger_name_to_fire",
+          padding:{left:10, top:5, right:10, bottom:5},
           radius: 10,
-          fontColor:"#8f9f84",
+          fontColor:"#3f3f34",
+          fontSize: 8,
           bgColor: "#cce5bc",
           color : "#7fc256"
       });
@@ -43,7 +47,8 @@ var TriggerConnection= draw2d.Connection.extend({
       // add the new decoration to the connection with a position locator.
       //
       this.add(this.label, new draw2d.layout.locator.ManhattanMidpointLocator());
-      
+      this.setRouter(routerToUse)
+
       this.label.installEditor(new draw2d.ui.LabelInplaceEditor());
     },
 
@@ -106,8 +111,8 @@ var TriggerConnection= draw2d.Connection.extend({
         delete memento.router
 
         memento.name = this.getName();
-        memento.source.name= this.getSource().getParent().getText()
-        memento.target.name= this.getTarget().getParent().getText()
+        memento.source.name= this.getSource().getParent().getName()
+        memento.target.name= this.getTarget().getParent().getName()
 
         return memento;
      },

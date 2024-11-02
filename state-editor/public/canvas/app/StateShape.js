@@ -53,9 +53,10 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
         // flag which indicates if the figure should read/write ports to
         // JSON
         this.persistPorts = false
-        this.classLabel.createPort("input")
-        this.classLabel.createPort("output")
-        
+        this.createPort("input")
+        this.createPort("output")
+
+
         this.add(this.classLabel);
         this.classLabel.on("contextmenu", (emitter, event)=>{
             $.contextMenu({
@@ -118,6 +119,7 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
     {
         return this.start
     },
+
 
     /**
      * @method
@@ -243,6 +245,9 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
             if(i>0){ // skip the header of the figure
                 memento.trigger.push({
                     name:e.figure.getName(),
+                    description:e.figure.getDescription(),
+                    sound_effect:e.figure.getSoundEffect(),
+                    system_prompt: e.figure.getSystemPrompt(),
                     conditions: e.figure.getConditions(),
                     actions: e.figure.getActions()
                 });
@@ -271,6 +276,9 @@ StateShape = draw2d.shape.layout.VerticalLayout.extend({
                  var trigger =this.addTrigger(e.name ?? "undefined");
                  trigger.setConditions(e.conditions ?? [])
                  trigger.setActions(e.actions ?? [])
+                 trigger.setDescription(e.description ?? "")
+                 trigger.setSoundEffect(e.sound_effect ?? "")
+                 trigger.setSystemPrompt(e.system_prompt ?? "")
              },this));
          }
 

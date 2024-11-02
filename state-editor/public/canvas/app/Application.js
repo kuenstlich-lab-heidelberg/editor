@@ -20,7 +20,7 @@ Application = Class.extend(
     {
 	    this.view = new View("canvas");
         this.toolbar = new Toolbar("canvas_toolbar", this.view)
-        
+
         // Databinding: helper attributes for the databinding
 		this.selectedFigure = null;
 
@@ -41,13 +41,13 @@ Application = Class.extend(
 		this.selectedFigure = event.figure;
 
         var data = this.selectedFigure.getPersistentAttributes()
-        window.parent.postMessage({ type: 'onStateSelect', data: data }, '*');
+        window.parent.postMessage({ type: data.type, event: 'onSelect', data: data }, '*');
 	},
 
     onUnselectCallback : function(emitter, event)
 	{
 		this.selectedFigure = null;
-        window.parent.postMessage({ type: 'onStateSelect', data: {} }, '*');
+        window.parent.postMessage({ type: "", event: 'onUnselect', data: {} }, '*');
 	}
 
 });
