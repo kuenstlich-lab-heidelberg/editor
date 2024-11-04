@@ -113,8 +113,12 @@
         }
       },
       updateConditions() {
-        // Split text by line and update jsonData.userData.conditions
-        this.jsonData.userData.conditions = this.conditionsText?.split('\n') ?? [];
+        const trimmedText = this.conditionsText?.trim();
+        if (trimmedText === "" || trimmedText.split('\n').every(line => line.trim() === "")) {
+          this.jsonData.userData.conditions = [];
+        } else {
+          this.jsonData.userData.conditions = trimmedText.split('\n').map(line => line.trim());
+        }
         this.onDataChange();
       },
       updateActions() {

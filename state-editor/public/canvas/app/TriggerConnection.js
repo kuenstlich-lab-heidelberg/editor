@@ -19,10 +19,9 @@ var TriggerConnection= draw2d.Connection.extend({
             extend({
                 targetDecorator: new draw2d.decoration.connection.ArrowDecorator(),
                 stroke:3,
-                outlineStroke:1,
-                outlineColor:"#7fc256",
                 color:"#cce5bc",
                 radius: 20,
+                dasharray:"- ",
                 router:routerToUse
             }, attr),
             extend({
@@ -50,6 +49,14 @@ var TriggerConnection= draw2d.Connection.extend({
       this.setRouter(routerToUse)
 
       this.label.installEditor(new draw2d.ui.LabelInplaceEditor());
+
+      this.on("change:userData", (emitter, event)=>{
+        this.updateStyle()
+      })
+    },
+
+    updateStyle: function(){
+        this.attr("dasharray", this.attr("userData")?.conditions?.length >0?"- ":null)
     },
 
     /**
@@ -126,10 +133,11 @@ var TriggerConnection= draw2d.Connection.extend({
       */
      setPersistentAttributes : function(memento)
      {
-         this._super(memento);
+        this._super(memento);
          
-         this.setName(memento.name);
-
-         return this;
+        this.setName(memento.name);
+        this.updateStyle()
+         
+        return this;
      }  
 });

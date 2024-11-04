@@ -58,7 +58,7 @@
               :type="item.type === 'integer' ? 'number' : 'text'"
               @change="updateInventory"
               outlined
-              dense
+               density="compact"
               full-width
             ></v-text-field>
           </td>
@@ -68,13 +68,13 @@
               :items="['string', 'boolean', 'integer']"
               @change="updateInventory"
               outlined
-              dense
+              density="compact"
               full-width
             ></v-select>
           </td>
           <td>
-            <v-btn icon @click="removeItem(item.key)">
-              <v-icon color="red">mdi-delete</v-icon>
+            <v-btn  size="small" icon @click="removeItem(item.key)">
+              <v-icon  size="small" color="red">mdi-delete</v-icon>
             </v-btn>
           </td>
         </tr>
@@ -166,6 +166,10 @@ export default {
 .v-textarea,
 .v-text-field {
   width: 100%;
+}
+
+::v-deep .v-input__details {
+  display: none;
 }
 
 .v-btn {

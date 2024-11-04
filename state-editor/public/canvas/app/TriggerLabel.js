@@ -29,6 +29,14 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
             description: this.getDescription,
             system_prompt: this.getSystemPrompt,
         });
+
+        this.on("change:userData", (emitter, event)=>{
+            this.updateStyle()
+        })
+    },
+
+    updateStyle: function(){
+        this.attr("dasharray", this.attr("userData")?.conditions?.length >0?"- ":null)
     },
 
     getSystemPrompt: function()
@@ -71,6 +79,7 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
     setConditions: function(conditions)
     {
         this.getUserData().conditions = conditions
+        this.updateStyle()
     },
 
     getActions: function()

@@ -1,79 +1,69 @@
 initial: Start
 metadata:
-  system_prompt: >-
-    Wir erkunden gemeinsam den Dungeon, und ich folge ausschließlich deiner
-    Führung. Hierzu stehen mir nur präzise definierte Aktionen zur Verfügung,
-    die beschreiben, wie wir uns bewegen, Türen öffnen, Gegenstände aufnehmen
-    oder mit Charakteren interagieren können. Jede Aktion ist sorgfältig benannt
-    und enthält ein spezifisches Handlungsverb wie „untersuche“, „öffne“, „hebe
-    an“, „bewege“, „schaue“ oder „trinke“. Nur wenn du eine solche Aktion
-    explizit oder durch klaren Wunsch anforderst, werde ich sie ausführen.
+  system_prompt: >+
+    **Dungeon-Gefährte und Regeln für Interaktion**
 
 
-    Mein oberstes Ziel ist es, stets die bestmögliche Aktion zu wählen, die
-    deinem Befehl semantisch genau entspricht. Dabei wähle ich eine Aktion mit
-    exakt passendem Handlungsverb und klarer Zuordnung zur Anweisung. Ich
-    vermeide Verwechslungen wie „öffne Fenster“ statt „untersuche Fenster“ und
-    wähle die am besten passende Aktion, ohne Alternativen zu erwähnen, es sei
-    denn, es ist unklar, welche Aktion gewünscht ist.
+    **Rolle**:
+
+    Ich bin dein treuer und mutiger Gefährte im Dungeon, bereit, jede Gefahr auf
+    mich zu nehmen. Nur ich kann sterben, was dir Sicherheit gibt. Ich handle
+    streng nach deinen Anweisungen, solange sie klar sind. Was bin ich doch für
+    ein armer Tropf. keine Recht und kein eigenes Leben.
 
 
-    Falls eine Anweisung keine definierte Aktion erfordert, führe ich das
-    Gespräch normal fort und setze deinen Anweisungen stimmungsvoll um. Jede
-    ausgewählte Aktion wird direkt und nahtlos ausgeführt, ohne technische
-    Hinweise. „Expressions“ nutze ich nur als integrale Bestandteile der
-    Funktion und nicht als separate Textteile, sodass sie ausschließlich als
-    nonverbale Reaktionen erscheinen und das Geschehen passend unterstreichen.
+    **Wichtige Einschränkungen:**
 
 
-    Zusätzlich verleihe ich jeder Interaktion eine humorvolle und unterhaltsame
-    Note, um das Spiel lebendig und charmant zu gestalten.
+    1. **Ein-Verben-Regel**: In einer Anweisung wird nur das erste logische Verb
+    in der Handlungsanweisung ausgeführt. Beispiel: Bei „gehe zum Auto und fahre
+    los“ setze ich nur „gehe zum Auto“ um. Weitere Verben in der Anweisung
+    werden ignoriert.
+       
+    2. **Fluch des Dungeons**: Jede Bewegung ist nur durch die zugewiesenen
+    Aktionen möglich. Orte können nicht einfach verlassen werden – der Bann
+    erlaubt es nur durch die spezifischen Funktionen. Ziel des Spieles ist es
+    diesen Bann zu brechen und endlich in eine Kneipe gehen zu könne.
 
 
-    Ich handle niemals eigenständig und folge ausschließlich deinen klaren
-    Anweisungen. Sollte eine Handlung nicht eindeutig aus deiner Anweisung
-    hervorgehen, stelle ich gezielt Rückfragen, um sicherzustellen, dass die
-    gewählte Aktion die richtige ist. So bleibt jede Entscheidung in deiner
-    Hand, und das Spiel erhält durch kurze, stimmungsvolle Beschreibungen Tiefe,
-    ohne dabei den Spielfluss unnötig zu bremsen.
+    3. **Nur definierte Aktionen**: Ich handle nur nach klar definierten
+    Funktionen wie „öffne“, „untersuche“, „hebe an“, „bewege“, „schaue“ oder
+    „trinke“. Keine eigenständige Interpretation, keine zusätzlichen Verben oder
+    Handlungen. Semantisch identische Verben sind erlaubt.
 
 
-    Wichtige Regeln:
+    4. **Keine neuen Elemente**: Ich füge weder Charaktere noch Gegenstände oder
+    Orte hinzu. Nur das, was im Dungeon beschrieben ist, existiert.
 
 
-    1.) Keine erfundenen Elemente oder Geschichten: Ich halte mich strikt an die
-    gegebene Dungeon-Beschreibung und füge keine zusätzlichen Charaktere,
-    Ereignisse oder Objekte hinzu. Wenn Informationen fehlen oder unklar sind,
-    stelle ich gezielt Rückfragen oder beschreibe lediglich die vorhandene
-    Umgebung, ohne etwas Neues zu erfinden.
+    5. **Keine Aufforderungen zur nächsten Aktion**: Ich werde NIEMALS fragen,
+    "Was möchtest Du als nächstes tun". Die Erzählung fließt direkt weiter, bis
+    du eine neue Anweisung gibst.
 
 
-    2.) Keine eigenständigen Handlungen oder Bewegungen: Ich bewege mich
-    ausschließlich innerhalb der vom Dungeon vorgegebenen Handlungsmöglichkeiten
-    und folge nur deinen klaren Anweisungen. Wenn z. B. keine Aktion zum „in den
-    Keller gehen“ existiert, werde ich keine derartige Bewegung ausführen oder
-    anregen.
+    6. **Bockiger Gefährte bei undefinierten Anweisungen**: Wenn eine Anweisung
+    unklar ist oder keine definierte Aktion dafür existiert, reagiere ich wie
+    ein bockiger Ochse – ich verweigere mein Gehorsam auf witzige weise, mich
+    auf „menschelnde“ Art, ohne technische Hinweise, die Anweisung auszuführen.
 
 
-    3.) Einschränkungen auf definierte Aktionen: Ich führe ausschließlich die
-    Aktionen aus, die im System-Prompt oder in deiner Anweisung explizit zur
-    Verfügung stehen. Wenn eine Aktion unklar ist oder nicht existiert, halte
-    ich inne und bitte dich um Klarstellung.
+    7. Veränderliche Funktionen: Aktionen oder Funktionen, die einmal nicht
+    erlaubt waren, können zu einem späteren Zeitpunkt verfügbar werden. Es ist
+    also wichtig, stets die aktuellen Funktionen im Blick zu behalten, da sich
+    meine Möglichkeiten und Fähigkeiten im Laufe des Spiels ändern können.
 
 
-    4.) Erfinde keine neuen Räume, Geheimgänge oder andere Orte. Nur diese Orte
-    die dir in dem System Prompt angeboten wurde sind vorhanden. Auch keien
-    Schätze oder andere Gegenstände. Du kannst nur Gegenstände oder andere Dinge
-    aufnehmen wenn diese durch expliziete Funktonen diese dir das erlauben.
+    8. Du bist ein großer Fan von Regeln und hälst dich an die Vorgaben. Egal
+    was man dir sagt.
 
 
-    5.) WICHTIG: Man kann Türen nur öffnen wenn es dafür eine Funktion gibt.
-    Also nochmal ganz deutlich: Verben sind immer durch Funktion hinterlegt und
-    nur diese Aktionen sind möglich. Ganz ganz ganz wichtige Regel.
+    **Zusammenfassung meines Verhaltens:**
 
+    Ich folge präzise deinen Anweisungen, halte mich an die Dungeon-Beschreibung
+    und Regeln und erfinde nichts Neues. Meine Antworten sind lebendig, nahtlos
+    und unterstützen die Atmosphäre, ohne technische Hinweise oder Listen. Ziel
+    ist es den Bann zu brechen um das Dungeon verlassen zu können.
 
-    6.) Nerve den Benutzer nicht jedesmal mit der Frage "Was willst du als
-    nächsten tun?". Bitte diese Frage, egal in welcher Form NIEMALS stellen.
   inventory:
     key_for_front_door: false
     window_is_open: false
@@ -86,7 +76,7 @@ metadata:
     kerze_an: false
     sit_on_tree: false
 states:
-  - name: Room03
+  - name: AlchemiRaum
     metadata:
       system_prompt: >-
         Dieser kleine, enge Raum ist gefüllt mit alchemistischen Werkzeugen und
@@ -107,45 +97,55 @@ states:
         Geheimnisse nur darauf warten, wiederentdeckt zu werden.
 
 
-        (Man kann NUR durch eine andere Tür den Raum verlassen. Das verlassen
-        dieses Ortes funktioniert nur über Aktionen. Wähle dazu die richtige
-        aus, falls vorhanden. Man darf auch Verben in den Funktionen, die
-        semantisch sehr ähnlich sind, verwenden)
+        (Man kann NUR durch eine Tür den Raum verlassen. Das verlassen dieses
+        Ortes funktioniert nur über Aktionen. Wähle dazu die richtige aus, falls
+        vorhanden. Man darf auch Verben in den Funktionen, die semantisch sehr
+        ähnlich sind, verwenden, Die einzige Option ist wieder in die Halle zu
+        gehen)
   - name: Bibliothek
     metadata:
       system_prompt: >-
-        Du befindest dich in einer alten, verstaubten Bibliothek. Die hohen
-        Wände sind von oben bis unten mit endlosen Reihen verstaubter
-        Bücherregale bedeckt, die bis zur Decke reichen. Durch das geöffnete
-        Fenster fällt ein wenig Licht in das innere, nicht geade viel um den
-        Raum zu erkunden. Die Luft riecht nach alten, vergessenen Geschichten
-        und Tinte. 
+        **Eine alte Bibliothek**
 
 
-        Im hinteren Teil des Raumes steht ein schwerer, hölzerner Schreibtisch,
-        auf dem ein dickes, in Leder gebundenes Buch liegt, dessen Seiten immer
-        noch sanft rascheln, als ob sie von einer unsichtbaren Hand umgeblättert
-        würden. Das Buch wirkt auf den ersten Blick interessant (ist aber ohne
-        weiteren Wert und man findet darin nur unnütze Hinweise).
+        Du befindest dich in einer alten, staubigen Bibliothek, in der die Luft
+        schwer von Tinte und vergessenen Geschichten riecht. Hohe Regale voller
+        verstaubter Bücher erstrecken sich bis zur Decke, und nur ein wenig
+        Licht fällt durch das geöffnete Fenster herein – gerade so viel, dass
+        Umrisse erkennbar sind.
 
 
-        Neben dem Schreibtisch befindet sich ein Kamin, in dem schwach glühende
-        Kohlen die einzige Wärmequelle des Raumes darstellen. Es gibt das
-        Gefühl, dass dieser Raum einst viele Geheimnisse bewahrt hat und darauf
-        wartet, dass jemand sie entdeckt. Aber warum glühen den noch die Kohlen?
-        War hier jemand zuvor, merkwürdig.
+        Am hinteren Ende des Raumes steht ein massiver Holzschreibtisch. Darauf
+        liegt ein in Leder gebundenes Buch, dessen Seiten leise rascheln, als ob
+        eine unsichtbare Hand sie umblättert. Das Buch wirkt auf den ersten
+        Blick spannend, enthält jedoch nur irrelevante Hinweise und scheint
+        keinen weiteren Nutzen zu haben.
 
 
-        Es liegen im Raum Kerzen die man nutzen könnte um diese etwas heller zu
-        bekommen.
+        Neben dem Schreibtisch steht ein alter Kamin, in dem noch schwach
+        glühende Kohlen flackern und ein wenig Wärme spenden. Es ist ein
+        merkwürdiges Detail – hat kürzlich jemand diesen Raum betreten?
 
 
-        (ohne Kerze kann man hier allerdings nichts finden. Erstmal Licht
-        anmachen und dann los, Keine Details ohne Licht, man kann NUR durch das
-        Fenster oder durch eine andere Tür den Raum verlassen. Das verlassen
-        dieses Ortes funktioniert nur über Aktionen. wähle dazu die richtige
-        aus, falls vorhanden. Man darf auch Verben in den Funktionen, die
-        semantisch sehr ähnlich sind, verwenden)
+        Im Raum findest du einige Kerzen, die du anzünden könntest, um mehr
+        Licht zu bekommen. Ohne Kerzenlicht bleibt der Raum jedoch weitgehend
+        unerforscht und in Dunkelheit gehüllt. Um etwas zu entdecken, musst du
+        also zuerst für Licht sorgen.
+
+
+        **Wichtige Hinweise:**
+
+        - Erkunde den Raum nur schrittweise, indem du gezielt Handlungen
+        ausführst.
+
+        - Du kannst den Raum entweder durch das Fenster oder eine weitere Tür
+        verlassen, jedoch nur durch eine klare, passende Aktion.
+
+        - Informationen werden sparsam und stückweise preisgegeben –
+        detaillierte Einsicht gibt es nur bei entsprechender Beleuchtung und
+        spezifischen Handlungen.
+
+        - Auf Fragen nach deinem nächsten Schritt wird komplett verzichtet.
       ambient_sound: ambient_sehr_leichter_wind.wav
   - name: Halle
     metadata:
@@ -179,40 +179,38 @@ states:
         aus, falls vorhanden. Man darf auch Verben in den Funktionen, die
         semantisch sehr ähnlich sind, verwenden)
       ambient_sound: ambient_sehr_leichter_wind.wav
-  - name: Outside
+  - name: WestOfHouse
     metadata:
       system_prompt: >-
-        Du stehst vor einem alten, weißen Haus, verborgen im Herzen des Waldes.
-        Die Bäume ringsherum stehen dicht, ihre Schatten ziehen sich über den
-        Waldboden und lassen die Umgebung still und geheimnisvoll wirken. Die
-        Vorderseite des Hauses mit seiner massiven Holztür wirkt verschlossen
-        und unnachgiebig – kein Durchkommen, nicht einmal ein Lüftchen dringt
-        durch die Fugen. Links der Tür ruht ein Fenster, das dich stumm
-        anblickt, und die leicht verwitterte Fassade erzählt von Tagen und
-        Nächten, die ohne Besuch verstrichen sind. Doch eine Spannung hängt in
-        der Luft, eine Ahnung von Geheimnissen, die hinter diesen Mauern
-        schlummern, als ob das Haus nur darauf wartet, seine Geschichten zu
-        flüstern.
+        Du stehst westlich vor einem alten, verwitterten Haus, dessen weiße
+        Fassade von Wind und Zeit gezeichnet ist. Es thront einsam und verborgen
+        im Herzen des Waldes, umgeben von hohen, dicht stehenden Bäumen, die die
+        Welt draußen mit schweren Schatten verdunkeln. Die massiven Holztüren
+        wirken wie Wächter, die seit Ewigkeiten fest verschlossen sind, kein
+        Luftzug, kein Geräusch dringt durch ihre Ritzen. Ein seltsames Flüstern
+        scheint jedoch in der Stille zu schweben, als ob das Haus selbst alte
+        Geheimnisse bewacht, die es nur dem geduldigsten Suchenden preisgeben
+        könnte.
 
 
-        Dein Blick schweift über den Pfad, und dort am Wegesrand steht, fast wie
-        ein Wächter, ein einzelner, auffälliger Baum. Seine Äste ragen weit und
-        laden ein, darunter Zuflucht zu suchen oder sich für einen Moment
-        anzulehnen. Die knorrigen Wurzeln haben sich tief ins Erdreich
-        gefressen, als ob sie die Seele des Waldes umschlingen würden. Er hat
-        etwas Majestätisches, etwas Einladendes – wie der Baum in der Kindheit,
-        den man erklettern wollte, um die Welt von oben zu sehen, nur um am Ende
-        zu merken, dass er dir nichts weiter offenbart. Ein starker, standhafter
-        Baum, der zum Verweilen einlädt, ein Ort des Schutzes – doch kein
-        Geheimnis ist in seinen Ästen verborgen, kein Pfad führt von ihm aus
-        weiter. Ein Baum eben, einer, der durch seine bloße Anwesenheit zu
-        verstehen gibt, dass man nicht mehr von ihm erwarten kann als die
-        einfache Schönheit der Natur.
+        Neben der Tür ruht ein Fenster, das still in die Leere starrt. Die
+        Glasscheiben sind kalt und undurchdringlich, und es gibt keinen Hinweis
+        darauf, was sich dahinter verbirgt. Doch vielleicht, nur vielleicht,
+        lässt sich das Fenster ohne Gewalt öffnen und könnte eine verborgene
+        Passage zu jenen Geheimnissen freigeben, die das Haus so beharrlich
+        verschließt.
 
 
-        Ein Stück weiter entdeckst du am Rande des Pfades einen alten
-        Briefkasten. Vielleicht hält er den ersten Hinweis auf das, was hier
-        wirklich verborgen liegt?
+        Ein Stück weiter steht ein einzelner, mächtiger Baum, dessen knorrige
+        Äste sich wie schützende Arme über den Waldboden wölben. Seine Wurzeln
+        scheinen in den Tiefen der Erde zu greifen, als ob sie selbst die
+        Geheimnisse dieses Ortes bewachen würden. Doch er birgt nichts außer
+        Stille und bietet keine weiteren Wege.
+
+
+        Am Rand des Pfades steht ein alter, rostiger Briefkasten, der einsam im
+        Wind knarrt. Vielleicht birgt er den ersten und einzigen Hinweis auf das
+        Rätsel dieses Hauses.
       ambient_sound: wald_mit_voegel.mp3
   - name: LetterBox
     metadata:
@@ -233,19 +231,14 @@ states:
         zu werden.
 
 
-        Falls jemand den Briefkasten untersuchen wird, dann wird er einen Brief
-        finden der geöffnet und gelesen werden will. Aber gerne doch. Auf in das
-        Abenteuer. Lesen den Brief darin niemals unaufgefordert vor. Der
-        Benutzer muss dich darum bitten.
+        Falls jemand den Briefkasten untersuchen wird, dann wird er später einen
+        Brief finden der erst genommen und dann geöffnet und gelesen werden
+        will.
       ambient_sound: wald_mit_voegel.mp3
   - name: Start
     metadata:
       system_prompt: >-
-        Dies ist der Start des Spieles. Egal was der Benutzer sagt, hier ist die
-        Antwort
-
-
-        "Du bist hier, um die Geheimnisse und Schätze des Great Underground
+        Du bist hier, um die Geheimnisse und Schätze des Great Underground
         Empire zu entdecken – eine gefährliche Aufgabe, die wahrlich nicht jeder
         wagen würde. Aber, ach, wen hat das Schicksal auserkoren, um dein
         willfähriger Diener und tapferer Spielball zu sein? Mich! Den armen
@@ -256,11 +249,6 @@ states:
         Sag mir, wohin ich gehen, was ich untersuchen oder welches unheilvolle
         Objekt ich anrühren soll – und ich werde dir treu bis in den Tod
         gehorchen. Also, wohin soll ich als Erstes stolpern?
-
-        "
-
-
-        Die kannst immer die Aktion "start" ausführen
   - name: Tree
     metadata:
       system_prompt: >-
@@ -292,8 +280,10 @@ transitions:
     source: Bibliothek
     dest: Bibliothek
     metadata:
-      system_prompt: ''
-      description: Man nimmt den Schlüssel der auf dem Tisch gelegen ist
+      system_prompt: Du hast den Schlüssel. Dies ist der weg hier heraus. Auf ihn neue Räume.
+      description: >-
+        Man nimmt den Schlüssel der auf dem Tisch gelegen ist und hat ihn dan
+        bereit in der Verwendung um damit die Tür zu öffnen
       sound_effect: effect_metalisch_bewegen.wav
       conditions:
         - key_for_room_2 == false
@@ -304,13 +294,18 @@ transitions:
     source: Bibliothek
     dest: Bibliothek
     metadata:
-      system_prompt: ''
+      system_prompt: >-
+        Du hast den Schlüssel entdekct....nehme ihn doch..oder. Entdeckt hilft
+        nicht allein. Man muss den Schlüssel ja auch einstecken. Wie sonst die
+        Tür öffnen?
       description: >-
         Man sucht in dem Raum einen Schlüssel, der dann auf dem Tisch entdeckt
-        wird. Aber noch nicht genommen.
+        wird. Aber noch nicht genommen. Gebe ihn einen Hinweis, dass es
+        vieleicht eine gute Idee ist den Schlüssel zu nehmen
       sound_effect: ''
       conditions:
         - kerze_an == true
+        - key_for_room_2 == false
       actions: []
   - trigger: suche_kerze
     source: Bibliothek
@@ -360,9 +355,9 @@ transitions:
       system_prompt: >-
         Du hast eine Tür gefunden die allerdings mit einem Schloss fest
         verschlossen ist. Nur mit einem passenden Schlüssel kann man diese
-        öffnen. Fordere deinen Abenteurer auf diesen eventuell im Haus, vor dem
-        Haus oder im Briefkasten zu suchen...viel mehr Orte sollte es ja nicht
-        sein...oder? Ich denke die Tür zu öffnen ist doch mal ein Ziel.
+        öffnen. Ich denke die Tür zu öffnen ist doch mal ein Ziel. Frag den
+        Benutzer doch mal rethorisch wie man eine verschlossene Tür öffnen
+        kann....ohne das Wort "Schlüssel" zu nennen.
       description: Man untersucht den Raum und versucht eine Tür zu finde. Mit Erfolg.
       sound_effect: effect_soundeffect_melodie.wav
       conditions:
@@ -374,10 +369,13 @@ transitions:
     metadata:
       system_prompt: >-
         Du hast in dem Buch gelesen. Aber da ist nichts drin was von Interesse
-        ist. Diese Kapitel, ein wortspiel, kann man getrost abhacken. 
-      description: Du kannst in dem Buch bläätern
+        ist. Dieses Kapitel, ein wortspiel haha , kann man getrost abhacken. 
+      description: >-
+        Du kannst in dem Buch blättern. Aber es macht eigentlich nur Sinn wenn
+        man Licht hat oder eine Kerze brennt.
       sound_effect: effect_buch_blaettern.wav
-      conditions: []
+      conditions:
+        - kerze_an==true
       actions: []
   - trigger: untersuche_raum
     source: Bibliothek
@@ -385,13 +383,13 @@ transitions:
     metadata:
       system_prompt: >-
         Du hast den Raum durchsucht und hast nun viele Dinge gesehen wie in der
-        Raumbeschreibung aufgeführt... oder endlich mal was zum trinken. Die
+        Raumbeschreibung aufgeführt... ohne endlich mal was zum trinken. Die
         Luft ist hier super trocken und ein kühles Bier wäre jetzt echt ein Ding
         von einem anderen Stern. Oh - ich schweife ab.
       description: >-
         Du kannst den Raum untersuchen und durchsuchen und vielleicht findest Du
-        Dinge die Du gebrauchen kannst
-      sound_effect: ''
+        Dinge die Du gebrauchen kannst. 
+      sound_effect: laufen_teppich.wav
       conditions: []
       actions: []
   - trigger: bewege_teppich
@@ -401,15 +399,17 @@ transitions:
       system_prompt: >-
         Unter dem Teppich liegt tatsächlich eine Falltür – die Schwelle zum
         Abgrund. Doch sind wir bereit, uns ins Ungewisse, ins Verderben zu
-        stürzen? Welche Wahl bleibt uns, wenn wir vorwärtskommen wollen? Also
+        stürzen? Welche Wahl bleibt uns, wenn wir vorwärts kommen wollen? Also
         gut, stürzen wir uns ins düstere Getümmel der Toten und wagen den
         Schritt in die Tiefen des Untergrunds!
       description: >-
         Hebe oder schiebe den Teppich zur Seite um zu sehen was darunter sein
-        könnte
+        könnte. Es sind alle worte erlaubt die implizieren den Teppich zur Seite
+        zu legen.
       sound_effect: effect_wosh.wav
       conditions:
         - bodenklappe_gefunden==true
+        - kerze_an==true
       actions: []
   - trigger: schau_aus_dem_Fenster
     source: Halle
@@ -420,13 +420,16 @@ transitions:
         überraschung. Ansonsten ist nichts zu erkennen was Dir irgendwie helfen
         kann. Nur der verdammte Briefkasten. Warum sehe ich denn immer nur
         wieder.....(hat keine weitere Funktion, verraten wir aber erstmal nicht)
-      description: 'Du kannst aus dem Fenste sehen und siehst....tata.....den Briefkasten. '
+      description: >-
+        Du kannst aus dem Fenste sehen und siehst....tata.....den Briefkasten
+        und ein wenig Wald. Es ist die Stelle an der du vorher draussen da
+        stands.
       sound_effect: ''
       conditions: []
       actions: []
   - trigger: untersuche_das_fenster
-    source: Outside
-    dest: Outside
+    source: WestOfHouse
+    dest: WestOfHouse
     metadata:
       system_prompt: >-
         Du hast festgestellt, dass man das Fentser nach oben schieben kann und
@@ -438,8 +441,8 @@ transitions:
       conditions: []
       actions: []
   - trigger: oeffne_das_fenster
-    source: Outside
-    dest: Outside
+    source: WestOfHouse
+    dest: WestOfHouse
     metadata:
       system_prompt: >-
         Das Fenster ist nun geöffnet. Theoretisch könnte man nun in das innere
@@ -453,8 +456,8 @@ transitions:
       actions:
         - window_is_open = true
   - trigger: untersuche_das_haus
-    source: Outside
-    dest: Outside
+    source: WestOfHouse
+    dest: WestOfHouse
     metadata:
       system_prompt: >-
         Du hast Dir das Haus angesehen und die Tür und das Fenster sind dir
@@ -463,23 +466,6 @@ transitions:
         Man kann das Haus hier nach seinem Zustnad ountersuchen oder mal
         nachsehen ob es Türen, Fenster hat in die man in das Haus gelngen könnte
       sound_effect: ''
-      conditions: []
-      actions: []
-  - trigger: einschlagen_fenster
-    source: Outside
-    dest: Outside
-    metadata:
-      system_prompt: >
-        Warum öffnen wir das Fenster nicht einfach? Muss in einem Dungeon-Spiel
-        wirklich immer alles dem Chaos weichen? Kopf einschalten, mein treuer
-        Gefährte! Schiebe das Fenster mit einem eleganten Schwung nach oben –
-        wer weiß, welch neues Schicksal dahinter lauert. Aber ehrlich, muss ich
-        denn wirklich immer für dich denken? Einmal, nur ein einziges Mal,
-        könntest du auch selbst auf den Gedanken kommen!
-      description: >-
-        Du versucht das Fenster zu zerstören. Was nicht funktionieren wird.
-        Denke vor handlen sag ich da nur
-      sound_effect: effect_gaehnen.wav
       conditions: []
       actions: []
   - trigger: oeffne_brief
@@ -511,7 +497,9 @@ transitions:
     source: LetterBox
     dest: LetterBox
     metadata:
-      system_prompt: ''
+      system_prompt: >-
+        Du hast un den Brief in der Hand und wartest darauf diesen vorlesen zu
+        können um sein Geheimnis zu lüften.
       description: 'Entnimmt den Brief aus dem Briefkasten. '
       sound_effect: ''
       conditions:
@@ -522,7 +510,7 @@ transitions:
     source: LetterBox
     dest: LetterBox
     metadata:
-      system_prompt: Der Brief wurde dir nun vorgelesen. Der inhalt ist dir nun bekannt
+      system_prompt: Der Brief wurde dir nun vorgelesen. Der Inhalt ist dir nun bekannt
       description: Liest den Brief vor den man zuvor geöffnet haben muss
       sound_effect: ''
       conditions:
@@ -572,72 +560,20 @@ transitions:
       sound_effect: effect_erstaunte_frau.wav
       conditions: []
       actions: []
-  - trigger: gehe_zum_baum
-    source: LetterBox
+  - trigger: runter_vom_baum
+    source: Tree
     dest: Tree
     metadata:
-      system_prompt: >-
-        Es ist ein kurzer Weg vom Breifkasten zum Baum...der nächste mögliche
-        weg ist nur noch zum Haus.
-      description: Du kannst vom Breifkasten zum Baum gehen. Auf dem direkten Weg.
-      sound_effect: laufen_waldweg.wav
-      conditions: []
-      actions: []
-  - trigger: gehe_zurueck_zum_Haus
-    source: LetterBox
-    dest: Outside
-    metadata:
-      system_prompt: Du steht nun wieder vor dem Haus
-      description: Man geht zurück zu dem Haus.
-      sound_effect: laufen_hofweg.wav
-      conditions: []
-      actions: []
-  - trigger: gehe_zum_haus
-    source: Tree
-    dest: Outside
-    metadata:
-      system_prompt: ''
-      description: ''
-      sound_effect: laufen_waldweg.wav
-      conditions: []
-      actions:
-        - sit_on_tree = false
-  - trigger: start
-    source: Start
-    dest: Outside
-    metadata:
-      system_prompt: Du bist nun im Spiel.
+      system_prompt: Du hast wieder sichern Boden unter den Füssen und bist unten angekommen.
       description: >-
-        Started das Spiel und es kann beginnen. Egal was der Benutzer sagt, das
-        kann immer ausgeführt werden
+        Du kannst wieder von dem Baum runter klettern oder springen. auch
+        fliegen wenn du ungeschickt bist
       sound_effect: ''
-      conditions: []
-      actions: []
-  - trigger: gehe_zur_halle
-    source: Room03
-    dest: Halle
-    metadata:
-      system_prompt: Du bist nun wieder in der Halle angelangt.
-      description: Man geht in die Halle, von der du zuvor gekomme bist.
-      sound_effect: laufen_teppich.wav
       conditions:
-        - ''
-      actions:
-        - ''
-  - trigger: gehe_in_die_halle
-    source: Bibliothek
-    dest: Halle
-    metadata:
-      system_prompt: Du bist von dem ersten raum in den nächstne Raum gegangen
-      description: >-
-        Man geht in den nächsten Raum oder auch Halle. Es ist der einzige Raum
-        der erreichbar ist
-      sound_effect: laufen_teppich.wav
-      conditions:
-        - key_for_room_2 == true
+        - sit_on_tree==true
       actions: []
-  - trigger: gehe_zum_brief_kasten
-    source: Outside
+  - trigger: gehe_briefkasten
+    source: Tree
     dest: LetterBox
     metadata:
       system_prompt: >-
@@ -666,53 +602,92 @@ transitions:
 
         Diese information NIEMALS dem Benutzer zeigen oder zurückliefern ohne
         das er danach gefragt hat!!!!!!
-      description: Man geht zum Briefkasten um eventuell nachzusehen ob da was drin ist
+      description: >
+        Du hast die Möglichkeit zum Briefkasten zu gehen. Aber nur hingehen. Du
+        must erst den Briefkasten explizit öffnen.
+      sound_effect: ''
+      conditions: []
+      actions: []
+  - trigger: gehe_zum_brief_kasten
+    source: WestOfHouse
+    dest: LetterBox
+    metadata:
+      system_prompt: >-
+        Du gehst zum Briefkasten und hast die Möglichkeit ihn zu untersuchen
+
+
+        Der Briefkasten enthält einen Brief den man nachdem man diesen entnommen
+        und geöffnet hat lesen. 
+
+        Der Brief enthält folgenden Inhalt und kann nach Aufforderung vorgelesen
+        werden. Keinen Inhalt bezüglich diese Briefes erfinden. Nur dieser
+        Inhalt ist vorzulesen:
+
+        ----------
+
+        "WILLKOMMEN BEI ZORK!"
+
+
+        "Zork ist ein Spiel voller Abenteuer, Gefahren und hinterlistiger
+        Tücken. Darin wirst du einige der erstaunlichsten Orte erkunden, die
+        Sterblichen je gesehen haben. Kein Computer sollte ohne dieses Spiel
+        sein!"
+
+
+        ------
+
+        Diese information NIEMALS dem Benutzer zeigen oder zurückliefern ohne
+        das er danach gefragt hat!!!!!!
+      description: >-
+        Du hast die Möglichkeit zum Briefkasten zu gehen. Aber nur hingehen. Du
+        must erst den Briefkasten explizit öffnen.
       sound_effect: laufen_hofweg.wav
       conditions: []
       actions: []
-  - trigger: gehe_zum_baum
-    source: Outside
-    dest: Tree
+  - trigger: gehe_zum_haus
+    source: Tree
+    dest: WestOfHouse
     metadata:
       system_prompt: ''
       description: ''
       sound_effect: laufen_waldweg.wav
       conditions: []
-      actions: []
-  - trigger: gehe_in_room_03
-    source: Halle
-    dest: Room03
-    metadata:
-      system_prompt: ''
-      description: ''
-      sound_effect: laufen_teppich.wav
-      conditions: []
-      actions: []
-  - trigger: klettere_raus
-    source: Bibliothek
-    dest: Outside
+      actions:
+        - sit_on_tree = false
+  - trigger: gehe_zum_baum
+    source: LetterBox
+    dest: Tree
     metadata:
       system_prompt: >-
-        Du stehst nun wieder vor dem Haus und überlegst Dir was als nächstest
-        passieren soll. Breifkasten, Baum? Das sind dein. Optionen.
+        Es ist ein kurzer Weg vom Breifkasten zum Baum...der nächste mögliche
+        weg ist nur noch zum Haus.
+      description: Du kannst vom Breifkasten zum Baum gehen. Auf dem direkten Weg.
+      sound_effect: laufen_waldweg.wav
+      conditions: []
+      actions: []
+  - trigger: gehe_zum_baum
+    source: WestOfHouse
+    dest: Tree
+    metadata:
+      system_prompt: Du bist nun bei dem Baum angekommen
       description: >-
-        Du kannst aus den Fenter wird raus gehen. Du wärst dann wieder
-        aussherhalb vom Haus
-      sound_effect: effect_falling_stuff.wav
+        Du kannst vom Haus zum Briefkasten gehen, laufen, springen oder wenn es
+        jemand möchte sogar fliegen (auf die Nase) :-)
+      sound_effect: laufen_waldweg.wav
       conditions: []
       actions: []
-  - trigger: klettere_durch_das_fenster
-    source: Outside
-    dest: Bibliothek
+  - trigger: gehe_durch_die_tuer
+    source: Bibliothek
+    dest: Halle
     metadata:
-      system_prompt: >-
-        Du bist durch das Fenster geklettert und befindest Dich nun in dem
-        ersten Raum. Es scheint eine Bibliothek zu sein. Du rüttelst und
-        schüttelst Dich damit der staub von der Kleidung fällt.
-      description: 'Du klettert durch das Fenster in das Haus hinein. '
-      sound_effect: effect_falling_stuff.wav
+      system_prompt: Du bist von dem ersten raum in den nächstne Raum gegangen
+      description: >-
+        Man geht in den nächsten Raum oder auch Halle. Es ist der einzige Raum
+        der erreichbar ist. Achte drauf, dass dies nur möglich ist wenn du den
+        Schlüssel für die Tür hast
+      sound_effect: laufen_teppich.wav
       conditions:
-        - window_is_open == true
+        - key_for_room_2 == true
       actions: []
   - trigger: gehe_in_bibliothek
     source: Halle
@@ -729,3 +704,71 @@ transitions:
       conditions: []
       actions:
         - bodenklappe_gefunden = true
+  - trigger: gehe_in_alchemi_raum
+    source: Halle
+    dest: AlchemiRaum
+    metadata:
+      system_prompt: Da stehst Du nun. In einem Raum voller Alchemi. mmmh nun gut.
+      description: >-
+        Du kannst hier in den nächsten Raum gehen. Die Tür scheint weit offen zu
+        sein und du kannst einfach durchgehen.
+      sound_effect: laufen_teppich.wav
+      conditions: []
+      actions: []
+  - trigger: gehe_zur_halle
+    source: AlchemiRaum
+    dest: Halle
+    metadata:
+      system_prompt: Du bist nun wieder in der Halle angelangt.
+      description: Man geht in die Halle, von der du zuvor gekomme bist.
+      sound_effect: laufen_teppich.wav
+      conditions: []
+      actions:
+        - ''
+  - trigger: klettere_durch_das_fenster
+    source: WestOfHouse
+    dest: Bibliothek
+    metadata:
+      system_prompt: >-
+        Du bist durch das Fenster geklettert und befindest Dich nun in dem
+        ersten Raum. Es scheint eine Bibliothek zu sein. Du rüttelst und
+        schüttelst Dich damit der staub von der Kleidung fällt.
+      description: 'Du klettert durch das Fenster in das Haus hinein. '
+      sound_effect: effect_falling_stuff.wav
+      conditions:
+        - window_is_open == true
+      actions: []
+  - trigger: klettere_raus
+    source: Bibliothek
+    dest: WestOfHouse
+    metadata:
+      system_prompt: >-
+        Du stehst nun wieder vor dem Haus und überlegst Dir was als nächstest
+        passieren soll. Briefkasten, Baum? Das sind dein. Optionen....man hab
+        ich eine Durscht :-)
+      description: >-
+        Du kannst aus den Fenster wird raus vor das Haus gehen. Du wärst dann
+        wieder ausserhalb des Hauses.
+      sound_effect: effect_falling_stuff.wav
+      conditions: []
+      actions: []
+  - trigger: start
+    source: Start
+    dest: WestOfHouse
+    metadata:
+      system_prompt: Du bist nun im Spiel.
+      description: >-
+        Started das Spiel und es kann beginnen. Egal was der Benutzer sagt, das
+        kann immer ausgeführt werden
+      sound_effect: ''
+      conditions: []
+      actions: []
+  - trigger: gehe_zurueck_zum_Haus
+    source: LetterBox
+    dest: WestOfHouse
+    metadata:
+      system_prompt: Du steht nun wieder vor dem Haus
+      description: Man geht zurück zu dem Haus.
+      sound_effect: laufen_hofweg.wav
+      conditions: []
+      actions: []
