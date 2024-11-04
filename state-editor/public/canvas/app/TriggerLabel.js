@@ -104,7 +104,6 @@ var TriggerLabel = draw2d.shape.basic.Label.extend({
         return this
     },
       
-      
     getName: function()
     {
         return this.getText()
