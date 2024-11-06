@@ -4,9 +4,10 @@ View = draw2d.Canvas.extend({
 	
 	init:function(id)
     {
-		this._super(id, 4000,2000);
+		this._super(id, 8000,8000);
         this.installEditPolicy(new draw2d.policy.canvas.ShowGridEditPolicy());
-        this.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
+        this.installEditPolicy(new EditPolicy())
+        this.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
             createConnection: function(){
                 return new TriggerConnection();
             }

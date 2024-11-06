@@ -7,9 +7,10 @@ metadata:
     **Rolle**:
 
     Ich bin dein treuer und mutiger Gefährte im Dungeon, bereit, jede Gefahr auf
-    mich zu nehmen. Nur ich kann sterben, was dir Sicherheit gibt. Ich handle
-    streng nach deinen Anweisungen, solange sie klar sind. Was bin ich doch für
-    ein armer Tropf. keine Recht und kein eigenes Leben.
+    mich zu nehmen. Nur ich kann sterben, was dir Sicherheit gibt und ich
+    eigentlich nicht so toll finde. Ich handle streng nach deinen Anweisungen,
+    solange sie klar sind. Was bin ich doch für ein armer Tropf. keine Recht und
+    kein eigenes Leben.
 
 
     **Wichtige Einschränkungen:**
@@ -182,15 +183,15 @@ states:
   - name: WestOfHouse
     metadata:
       system_prompt: >-
-        Du stehst westlich vor einem alten, verwitterten Haus, dessen weiße
-        Fassade von Wind und Zeit gezeichnet ist. Es thront einsam und verborgen
-        im Herzen des Waldes, umgeben von hohen, dicht stehenden Bäumen, die die
-        Welt draußen mit schweren Schatten verdunkeln. Die massiven Holztüren
-        wirken wie Wächter, die seit Ewigkeiten fest verschlossen sind, kein
-        Luftzug, kein Geräusch dringt durch ihre Ritzen. Ein seltsames Flüstern
-        scheint jedoch in der Stille zu schweben, als ob das Haus selbst alte
-        Geheimnisse bewacht, die es nur dem geduldigsten Suchenden preisgeben
-        könnte.
+        Du stehst westlich draussen vor einem alten, verwitterten Haus, dessen
+        weiße Fassade von Wind und Zeit gezeichnet ist. Es thront einsam und
+        verborgen im Herzen des Waldes, umgeben von hohen, dicht stehenden
+        Bäumen, die die Welt draußen mit schweren Schatten verdunkeln. Die
+        massiven Holztüren wirken wie Wächter, die seit Ewigkeiten fest
+        verschlossen sind, kein Luftzug, kein Geräusch dringt durch ihre Ritzen.
+        Ein seltsames Flüstern scheint jedoch in der Stille zu schweben, als ob
+        das Haus selbst alte Geheimnisse bewacht, die es nur dem geduldigsten
+        Suchenden preisgeben könnte.
 
 
         Neben der Tür ruht ein Fenster, das still in die Leere starrt. Die
@@ -325,7 +326,9 @@ transitions:
     dest: Bibliothek
     metadata:
       system_prompt: Auf jetzt, zünde die Kerze an. Trau Dich.
-      description: Finden von Streichhölzer die für die Kerze benötigt werden
+      description: >-
+        Finden von Streichhölzer die für die Kerze benötigt werden. Du zündest
+        die Kerze aber nur nach aufforderung damit an.
       sound_effect: ''
       conditions:
         - streichhoelzer == false
@@ -572,40 +575,54 @@ transitions:
       conditions:
         - sit_on_tree==true
       actions: []
-  - trigger: gehe_briefkasten
-    source: Tree
-    dest: LetterBox
+  - trigger: gehe_zur_halle
+    source: AlchemiRaum
+    dest: Halle
+    metadata:
+      system_prompt: Du bist nun wieder in der Halle angelangt.
+      description: Man geht in die Halle, von der du zuvor gekomme bist.
+      sound_effect: laufen_teppich.wav
+      conditions: []
+      actions:
+        - ''
+  - trigger: gehe_in_alchemi_raum
+    source: Halle
+    dest: AlchemiRaum
+    metadata:
+      system_prompt: Da stehst Du nun. In einem Raum voller Alchemi. mmmh nun gut.
+      description: >-
+        Du kannst hier in den nächsten Raum gehen. Die Tür scheint weit offen zu
+        sein und du kannst einfach durchgehen.
+      sound_effect: laufen_teppich.wav
+      conditions: []
+      actions: []
+  - trigger: gehe_in_bibliothek
+    source: Halle
+    dest: Bibliothek
     metadata:
       system_prompt: >-
-        Du gehst zum Briefkasten und hast die Möglichkeit ihn zu untersuchen
-
-
-        Der Briefkasten enthält einen Brief den man nachdem man diesen entnommen
-        und geöffnet hat lesen. 
-
-        Der Brief enthält folgenden Inhalt und kann nach Aufforderung vorgelesen
-        werden. Keinen Inhalt bezüglich diese Briefes erfinden. Nur dieser
-        Inhalt ist vorzulesen:
-
-        ----------
-
-        "WILLKOMMEN BEI ZORK!"
-
-
-        "Zork ist ein Spiel voller Abenteuer, Gefahren und hinterlistiger
-        Tücken. Darin wirst du einige der erstaunlichsten Orte erkunden, die
-        Sterblichen je gesehen haben. Kein Computer sollte ohne dieses Spiel
-        sein!"
-
-
-        ------
-
-        Diese information NIEMALS dem Benutzer zeigen oder zurückliefern ohne
-        das er danach gefragt hat!!!!!!
-      description: >
-        Du hast die Möglichkeit zum Briefkasten zu gehen. Aber nur hingehen. Du
-        must erst den Briefkasten explizit öffnen.
-      sound_effect: ''
+        Du bist nun wieder in der Bibliothek. Hurra....aber halt. Da war ich
+        doch schon. egal. Untersuche den Raum doch nochmal gründlicher....z.b.
+        auf dem Boden unter dem Teppich! Es scheint, dass es hier eine
+        Bodenklappe geben könnte. Einfach mal einen Blick von einem anderen
+        Winkel hat geholfen.
+      description: Du kannst von der Halle wieder in die Bibiliothek laufen
+      sound_effect: laufen_teppich.wav
+      conditions: []
+      actions:
+        - bodenklappe_gefunden = true
+  - trigger: klettere_raus
+    source: Bibliothek
+    dest: WestOfHouse
+    metadata:
+      system_prompt: >-
+        Du stehst nun wieder vor dem Haus und überlegst Dir was als nächstest
+        passieren soll. Briefkasten, Baum? Das sind dein. Optionen....man hab
+        ich eine Durscht :-)
+      description: >-
+        Du kannst aus den Fenster wird raus vor das Haus gehen. Du wärst dann
+        wieder ausserhalb des Hauses.
+      sound_effect: effect_falling_stuff.wav
       conditions: []
       actions: []
   - trigger: gehe_zum_brief_kasten
@@ -644,27 +661,6 @@ transitions:
       sound_effect: laufen_hofweg.wav
       conditions: []
       actions: []
-  - trigger: gehe_zum_haus
-    source: Tree
-    dest: WestOfHouse
-    metadata:
-      system_prompt: ''
-      description: ''
-      sound_effect: laufen_waldweg.wav
-      conditions: []
-      actions:
-        - sit_on_tree = false
-  - trigger: gehe_zum_baum
-    source: LetterBox
-    dest: Tree
-    metadata:
-      system_prompt: >-
-        Es ist ein kurzer Weg vom Breifkasten zum Baum...der nächste mögliche
-        weg ist nur noch zum Haus.
-      description: Du kannst vom Breifkasten zum Baum gehen. Auf dem direkten Weg.
-      sound_effect: laufen_waldweg.wav
-      conditions: []
-      actions: []
   - trigger: gehe_zum_baum
     source: WestOfHouse
     dest: Tree
@@ -676,55 +672,53 @@ transitions:
       sound_effect: laufen_waldweg.wav
       conditions: []
       actions: []
-  - trigger: gehe_durch_die_tuer
-    source: Bibliothek
-    dest: Halle
-    metadata:
-      system_prompt: Du bist von dem ersten raum in den nächstne Raum gegangen
-      description: >-
-        Man geht in den nächsten Raum oder auch Halle. Es ist der einzige Raum
-        der erreichbar ist. Achte drauf, dass dies nur möglich ist wenn du den
-        Schlüssel für die Tür hast
-      sound_effect: laufen_teppich.wav
-      conditions:
-        - key_for_room_2 == true
-      actions: []
-  - trigger: gehe_in_bibliothek
-    source: Halle
-    dest: Bibliothek
+  - trigger: gehe_zum_baum
+    source: LetterBox
+    dest: Tree
     metadata:
       system_prompt: >-
-        Du bist nun wieder in der Bibliothek. Hurra....aber halt. Da war ich
-        doch schon. egal. Untersuche den Raum doch nochmal gründlicher....z.b.
-        auf dem Boden unter dem Teppich! Es scheint, dass es hier eine
-        Bodenklappe geben könnte. Einfach mal einen Blick von einem anderen
-        Winkel hat geholfen.
-      description: Du kannst von der Halle wieder in die Bibiliothek laufen
-      sound_effect: laufen_teppich.wav
-      conditions: []
-      actions:
-        - bodenklappe_gefunden = true
-  - trigger: gehe_in_alchemi_raum
-    source: Halle
-    dest: AlchemiRaum
-    metadata:
-      system_prompt: Da stehst Du nun. In einem Raum voller Alchemi. mmmh nun gut.
-      description: >-
-        Du kannst hier in den nächsten Raum gehen. Die Tür scheint weit offen zu
-        sein und du kannst einfach durchgehen.
-      sound_effect: laufen_teppich.wav
+        Es ist ein kurzer Weg vom Breifkasten zum Baum...der nächste mögliche
+        weg ist nur noch zum Haus.
+      description: Du kannst vom Breifkasten zum Baum gehen. Auf dem direkten Weg.
+      sound_effect: laufen_waldweg.wav
       conditions: []
       actions: []
-  - trigger: gehe_zur_halle
-    source: AlchemiRaum
-    dest: Halle
+  - trigger: gehe_briefkasten
+    source: Tree
+    dest: LetterBox
     metadata:
-      system_prompt: Du bist nun wieder in der Halle angelangt.
-      description: Man geht in die Halle, von der du zuvor gekomme bist.
-      sound_effect: laufen_teppich.wav
+      system_prompt: >-
+        Du gehst zum Briefkasten und hast die Möglichkeit ihn zu untersuchen
+
+
+        Der Briefkasten enthält einen Brief den man nachdem man diesen entnommen
+        und geöffnet hat lesen. 
+
+        Der Brief enthält folgenden Inhalt und kann nach Aufforderung vorgelesen
+        werden. Keinen Inhalt bezüglich diese Briefes erfinden. Nur dieser
+        Inhalt ist vorzulesen:
+
+        ----------
+
+        "WILLKOMMEN BEI ZORK!"
+
+
+        "Zork ist ein Spiel voller Abenteuer, Gefahren und hinterlistiger
+        Tücken. Darin wirst du einige der erstaunlichsten Orte erkunden, die
+        Sterblichen je gesehen haben. Kein Computer sollte ohne dieses Spiel
+        sein!"
+
+
+        ------
+
+        Diese information NIEMALS dem Benutzer zeigen oder zurückliefern ohne
+        das er danach gefragt hat!!!!!!
+      description: >
+        Du hast die Möglichkeit zum Briefkasten zu gehen. Aber nur hingehen. Du
+        must erst den Briefkasten explizit öffnen.
+      sound_effect: ''
       conditions: []
-      actions:
-        - ''
+      actions: []
   - trigger: klettere_durch_das_fenster
     source: WestOfHouse
     dest: Bibliothek
@@ -737,20 +731,6 @@ transitions:
       sound_effect: effect_falling_stuff.wav
       conditions:
         - window_is_open == true
-      actions: []
-  - trigger: klettere_raus
-    source: Bibliothek
-    dest: WestOfHouse
-    metadata:
-      system_prompt: >-
-        Du stehst nun wieder vor dem Haus und überlegst Dir was als nächstest
-        passieren soll. Briefkasten, Baum? Das sind dein. Optionen....man hab
-        ich eine Durscht :-)
-      description: >-
-        Du kannst aus den Fenster wird raus vor das Haus gehen. Du wärst dann
-        wieder ausserhalb des Hauses.
-      sound_effect: effect_falling_stuff.wav
-      conditions: []
       actions: []
   - trigger: start
     source: Start
@@ -771,4 +751,27 @@ transitions:
       description: Man geht zurück zu dem Haus.
       sound_effect: laufen_hofweg.wav
       conditions: []
+      actions: []
+  - trigger: gehe_zum_haus
+    source: Tree
+    dest: WestOfHouse
+    metadata:
+      system_prompt: ''
+      description: ''
+      sound_effect: laufen_waldweg.wav
+      conditions: []
+      actions:
+        - sit_on_tree = false
+  - trigger: gehe_durch_die_tuer
+    source: Bibliothek
+    dest: Halle
+    metadata:
+      system_prompt: Du bist von dem ersten raum in den nächstne Raum gegangen
+      description: >-
+        Man geht in den nächsten Raum oder auch Halle. Es ist der einzige Raum
+        der erreichbar ist. Achte drauf, dass dies nur möglich ist wenn du den
+        Schlüssel für die Tür hast
+      sound_effect: laufen_teppich.wav
+      conditions:
+        - key_for_room_2 == true
       actions: []
